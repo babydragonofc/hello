@@ -1,0 +1,86 @@
+* {
+    color: white;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url(https://blob.gifcities.org/gifcities/33IUA4JRR35YRIDJTRRO5NIO4PIS4I2Y.gif);
+}
+
+body .main {
+    width: 60%;
+}
+
+@media screen and (max-width: 800px) {
+    body .main {
+        width: 100%;
+    }
+    img {
+        width: 70%;
+        height: 70%;
+    }
+    #project {
+        flex-direction: column;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid white;
+}
+
+main header {
+    border-bottom: 1px solid white;
+    width: 100%;
+    font-size: 30px;
+}
+
+main div {
+    padding: 1em;
+}
+
+.flex {
+    display: flex;
+    gap: 1em;
+}
+
+.flex.vertical {
+    flex-direction: column;
+}
+
+.flex.horizontal {
+    flex-direction: row;
+}
+
+.noPadding {
+    padding: 0;
+}
+
+section {
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    gap: 1em;
+    box-sizing: border-box;
+}
+
+dark {
+    color: gray;
+}
+
+.flag {
+    width: 50%;
+}
+
+a {
+    display: contents;
+    text-decoration: underline;
+    color: rgb(123, 0, 255);
+}
