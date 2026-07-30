@@ -1,7 +1,15 @@
-* {
-    color: white;
+@font-face {
+  font-family: 'Qablasco';
+  src: url('Qablasco.ttf ') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
+* {
+    color: white;
+    font-family: 'MS UI Gothic', Arial, sans-serif;
+}
 
 body {
     display: flex;
@@ -27,6 +35,7 @@ body .main {
     #project {
         flex-direction: column;
     }
+
 }
 
 main {
@@ -46,6 +55,15 @@ main div {
     padding: 1em;
 }
 
+h1,h2,h3,h4,h5,p,span {
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    font-family: Qablasco, Arial, sans-serif;
+}
+
 .flex {
     display: flex;
     gap: 1em;
@@ -55,12 +73,24 @@ main div {
     flex-direction: column;
 }
 
+.flex.vertical.reverse {
+    flex-direction: column-reverse;
+}
+
+.flex.horizontal.reverse {
+    flex-direction: row-reverse;
+}
+
 .flex.horizontal {
     flex-direction: row;
 }
 
 .noPadding {
     padding: 0;
+}
+
+.noMargin {
+    margin: 0;
 }
 
 section {
@@ -76,11 +106,26 @@ dark {
 }
 
 .flag {
-    width: 50%;
+    width: 35%;
+}
+
+.disc {
+    width: 15dvw;
+    height: 15dvw;
 }
 
 a {
     display: contents;
     text-decoration: underline;
     color: rgb(123, 0, 255);
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.side-bar {
+    width: 200px;
+    height: 500px
 }
