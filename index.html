@@ -10,7 +10,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 </head>
 <body>
-    <img src="text.gif" alt="" style=" cursor: pointer;" onclick="alert('nem esse kk')">
+    <div class="cursor-animado"></div>
+    <img src="text.gif" class="cursor-select" onclick="alert('nem esse kk')">
 
     <div class="wrapper">
         <div class="side-bar">
@@ -23,7 +24,7 @@
         </div>
         <main class="main">
             <h1 class="title" id="start"><wonder class="rainbow"> Oi!!! > <</wonder></h1>
-            <span><dark>textos <span style="color: rgb(123, 0, 255); cursor: pointer;" onclick="alert('esse não')">roxos</span> são links</dark></span>
+            <span><dark>textos <span style="color: rgb(123, 0, 255);" class="cursor-select" onclick="alert('esse não')">roxos</span> são links</dark></span>
             <span style="color: red;">não compartilhe esse site com ninguém sem minha permissão, por favor</span>
             <img src="https://blob.gifcities.org/gifcities/DZZO5K3R7XSNQJRRWSAHWILLK7ZHI3WM.gif" alt="">
             <section>
@@ -109,11 +110,28 @@
                     <h1 class="title"><wonder class="rainbow">EXTRAS</wonder></h1>
                     <img src="https://pixelsafari.neocities.org/dividers/lavenderhearts.gif" alt="">
                 </div>
-                <iframe src="https://emillymartins.atabook.org" frameborder="0"></iframe>
+
+                <div class="flex">
+                    <iframe src="https://emillymartins.atabook.org" frameborder="0"></iframe>
+
+                    <main class="flex vertical">
+                        <header>
+                            <h3 class="title">CURSOR</h3>
+                        </header>
+
+                        <div class="flex vertical" id="cursors">
+                            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a11b1e6b-dd58-4721-9a02-f7a9d1705cc3/daf5fg7-fba18d54-f5c4-4132-ac04-f41e90873269.jpg/v1/fit/w_512,h_293,q_70,strp/roblox_stamp_3_0_by_darkyoshi973_daf5fg7-375w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MjkzIiwicGF0aCI6Ii9mL2ExMWIxZTZiLWRkNTgtNDcyMS05YTAyLWY3YTlkMTcwNWNjMy9kYWY1Zmc3LWZiYTE4ZDU0LWY1YzQtNDEzMi1hYzA0LWY0MWU5MDg3MzI2OS5qcGciLCJ3aWR0aCI6Ijw9NTEyIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.zzxvkE4jcGxD_5xsKIItGliOgfpTBr6Zv3z2mZ8uLVY" alt="" onclick="setCursor(1)">
+                            <img src="https://i.pinimg.com/736x/ba/9d/69/ba9d69de4b36441387f8e6e6256edeb4.jpg" alt="" onclick="setCursor(2)">
+                        </div>
+                    </main>
+                </div>
                 <img src="https://i.imgflip.com/axsj0d.jpg" alt="" width="150px">
+
             </main>
         </main>
     </div>
     <script src="script.js"></script>
+    <script src="https://louisabraham.github.io/nekojs/neko.js" data-autostart></script>
+
 </body>
 </html>

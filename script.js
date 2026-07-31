@@ -1,4 +1,4 @@
-const siteVer = 3;
+const siteVer = 2;
 
 setTimeout(() => {
     if (siteVer != localStorage.getItem("siteVer")) alert("Novas Mudanças ^^")
@@ -72,3 +72,46 @@ function scrollF(elId) {
         behavior: 'smooth'
     });
 }
+
+const cursor = document.querySelector('.cursor-animado');
+const cursors = [
+    {normal: "", select: ""},
+    {normal: "NormalSelect.cur", select: "LinkSelect.cur"},
+    {normal: "mikuCursor.gif", select: "mikuCursor2.gif"},
+    {normal: "https://www.rw-designer.com/cursor-view/184230.png", select: "https://www.rw-designer.com/cursor-view/184231.png"}
+]
+
+let activeCursor = 0;
+
+function setCursor(id) {
+    activeCursor = id;
+
+    if(id == 0) {
+        cursor.style.display = "none";
+        document.querySelector('body').style.cursor = "default";
+        return;
+    }
+
+    cursor.style.display = "block";
+    document.querySelector('body').style.cursor = "none";
+
+    cursor.style.backgroundImage = "url(" + cursors[id].normal + ")";
+
+}
+
+
+document.addEventListener('mousemove', (e) => {
+  cursor.style.left = `${e.pageX - cursor.offsetWidth / 2 + 5 }px`;
+  cursor.style.top = `${e.pageY - cursor.offsetHeight / 2 + 5}px`;
+});
+
+document.querySelectorAll('button, a, .cursor-select').forEach(el => {
+    el.addEventListener('mouseover', () => {
+        cursor.style.backgroundImage = "url(" + cursors[activeCursor].select + ")";
+    });
+    el.addEventListener('mouseout', () => {
+        console.log(cursors[activeCursor].normal)
+        cursor.style.backgroundImage = "url(" + cursors[activeCursor].normal + ")";
+    });
+
+})
