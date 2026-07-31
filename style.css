@@ -97,6 +97,10 @@ button, a, .cursor-select {
     flex-direction: row;
 }
 
+.flex.top {
+    align-items: flex-start;
+}
+
 .noPadding {
     padding: 0;
 }
@@ -192,6 +196,22 @@ iframe body::-webkit-scrollbar {
     align-items: center;
 }
 
+
+#cursors img {
+    width: 100px;
+}
+
+.logoJogo {
+    width: 400px;
+}
+
+.draw {
+    border: 30px solid transparent;
+    border-image: url(https://i.postimg.cc/Th8qd5DX/lace.png) 25.5 fill repeat;
+    width: 200px;
+    margin-bottom: 1em;
+}
+
 @media screen and (max-width: 800px) {
     body .article {
         width: 100%;
@@ -207,16 +227,12 @@ iframe body::-webkit-scrollbar {
         display: none;
     }
 
-    .divider {
-        flex-direction: column;
+    .divider, .gameDiv {
+        flex-direction: column !important;
+    }
+    
+    .gameDiv.top {
+        align-items: center !important;
     }
 }
 
-#cursors img {
-    width: 100px;
-}
-
-.logoJogo {
-        width: 400px;
-
-}
