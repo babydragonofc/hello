@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
   
       if (el.classList.contains("rainbow"))rainbow(letras)
   })
+
+     window.scrollTo({
+        top:0,
+        behavior: 'smooth'
+    });
 });
 
 
@@ -81,11 +86,13 @@ const cursors = [
     {normal: "https://www.rw-designer.com/cursor-view/184230.png", select: "https://www.rw-designer.com/cursor-view/184231.png"}
 ]
 
-let activeCursor = 0;
+let activeCursor = localStorage.getItem("cursor") || 0;
+setCursor(activeCursor);
+
 
 function setCursor(id) {
     activeCursor = id;
-
+    localStorage.setItem("cursor", id)
     if(id == 0) {
         cursor.style.display = "none";
         document.querySelector('body').style.cursor = "default";
@@ -98,7 +105,6 @@ function setCursor(id) {
     cursor.style.backgroundImage = "url(" + cursors[id].normal + ")";
 
 }
-
 
 document.addEventListener('mousemove', (e) => {
   cursor.style.left = `${e.pageX - cursor.offsetWidth / 2 + 5 }px`;
@@ -115,3 +121,4 @@ document.querySelectorAll('button, a, .cursor-select').forEach(el => {
     });
 
 })
+

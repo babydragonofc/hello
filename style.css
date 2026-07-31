@@ -36,22 +36,26 @@ body {
 
 body .main {
     width: 60%;
-}
-
-main {
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 1px solid white;
 }
 
-main header {
+article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid white;
+}
+
+article header {
     border-bottom: 1px solid white;
     width: 100%;
     font-size: 30px;
 }
 
-main div {
+article div {
     padding: 1em;
 }
 
@@ -184,8 +188,12 @@ iframe body::-webkit-scrollbar {
     display: none;
 }
 
+.divider {
+    align-items: center;
+}
+
 @media screen and (max-width: 800px) {
-    body .main {
+    body .article {
         width: 100%;
     }
     .disc {
@@ -199,7 +207,7 @@ iframe body::-webkit-scrollbar {
         display: none;
     }
 
-    #extras {
+    .divider {
         flex-direction: column;
     }
 }
@@ -208,3 +216,7 @@ iframe body::-webkit-scrollbar {
     width: 100px;
 }
 
+.logoJogo {
+        width: 400px;
+
+}
