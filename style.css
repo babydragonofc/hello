@@ -1,44 +1,101 @@
+/* ==========================================
+   FONTES
+========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
 
 @font-face {
-  font-family: 'Qablasco';
-  src: url('Qablasco.ttf ') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: "Qablasco";
+    src: url("Qablasco.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
+
+/* ==========================================
+   RESET
+========================================== */
 
 * {
     color: white;
-    font-family: 'MS UI Gothic', Arial, sans-serif;
+    font-family: "MS UI Gothic", Arial, sans-serif;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+span {
+    margin: 0;
+    padding: 0;
+}
+
+/* ==========================================
+   BODY
+========================================== */
 
 body {
     position: relative;
-    overflow-x: hidden;
-    overflow-y: auto;
+    min-height: 100vh;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
     background-image: url(https://blob.gifcities.org/gifcities/33IUA4JRR35YRIDJTRRO5NIO4PIS4I2Y.gif);
 }
 
+/* ==========================================
+   CURSOR
+========================================== */
+
 .cursor-animado {
-  width: 32px;
-  height: 32px;
-  background-color: transparent;
-  position: absolute;
-  pointer-events: none; /* Evita que o cursor interfira nos cliques */
-  transition: transform 0.1s ease;
-  z-index: 90;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+
+    background-color: transparent;
+    pointer-events: none;
+    transition: transform .1s ease;
+    z-index: 90;
 }
+
+button,
+a,
+.cursor-select {
+    cursor: none;
+}
+
+/* ==========================================
+   TIPOGRAFIA
+========================================== */
+
+.title,
+.title span {
+    font-family: Qablasco, Arial, sans-serif;
+}
+
+dark {
+    color: gray;
+}
+
+/* ==========================================
+   LAYOUT
+========================================== */
 
 body .main {
     width: 60%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
     border: 1px solid white;
 }
 
@@ -46,35 +103,54 @@ article {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     border: 1px solid white;
 }
 
-article header {
-    border-bottom: 1px solid white;
+article header,
+main header {
     width: 100%;
     font-size: 30px;
+    border-bottom: 1px solid white;
 }
 
 article div {
     padding: 1em;
 }
 
-h1,h2,h3,h4,h5,p,span {
-    margin: 0;
-    padding: 0;
+section {
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    gap: 1em;
+    box-sizing: border-box;
 }
 
-button {
-    color: black;
+.wrapper {
+    display: flex;
+    justify-content: center;
 }
 
-button, a, .cursor-select {
-    cursor: none;
+.divider {
+    align-items: center;
 }
 
-.title, .title span {
-    font-family: Qablasco, Arial, sans-serif;
+/* ==========================================
+   GALERIA
+========================================== */
+
+.galeria {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    justify-items: center;
+    gap: 1em;
+    margin-top:1em;
 }
+
+/* ==========================================
+   FLEX UTILITIES
+========================================== */
 
 .flex {
     display: flex;
@@ -89,17 +165,21 @@ button, a, .cursor-select {
     flex-direction: column-reverse;
 }
 
-.flex.horizontal.reverse {
-    flex-direction: row-reverse;
-}
-
 .flex.horizontal {
     flex-direction: row;
+}
+
+.flex.horizontal.reverse {
+    flex-direction: row-reverse;
 }
 
 .flex.top {
     align-items: flex-start;
 }
+
+/* ==========================================
+   UTILITÁRIOS
+========================================== */
 
 .noPadding {
     padding: 0;
@@ -109,17 +189,23 @@ button, a, .cursor-select {
     margin: 0;
 }
 
-section {
-    display: flex;
-    width: 100%;
-    padding: 1em;
-    gap: 1em;
-    box-sizing: border-box;
+/* ==========================================
+   LINKS / BOTÕES
+========================================== */
+
+button {
+    color: black;
 }
 
-dark {
-    color: gray;
+a {
+    display: contents;
+    color: rgb(123, 0, 255);
+    text-decoration: underline;
 }
+
+/* ==========================================
+   COMPONENTES
+========================================== */
 
 .flag {
     width: 35%;
@@ -130,29 +216,37 @@ dark {
     height: 15dvw;
 }
 
-a {
-    display: contents;
-    text-decoration: underline;
-    color: rgb(123, 0, 255);
+.logoJogo {
+    width: 400px;
 }
 
-.wrapper {
-    display: flex;
-    justify-content: center;
+.draw {
+    width: 200px;
+    margin-bottom: 1em;
+
+    border: 30px solid transparent;
+    border-image: url(https://i.postimg.cc/Th8qd5DX/lace.png) 25.5 fill repeat;
 }
+
+/* ==========================================
+   SIDEBAR
+========================================== */
 
 .side-bar {
+    position: fixed;
+    left: 5dvw;
+
     width: 200px;
     height: 293px;
-    background-size: cover;
-    background-image: url(note.png);
-    position: fixed;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1em;
-    left: 5dvw;
+
+    background-image: url(note.png);
+    background-size: cover;
 }
 
 .side-bar .wing {
@@ -162,77 +256,98 @@ a {
 }
 
 .side-bar .wing.t {
-    right: 0;
     left: -25px;
+    right: 0;
     transform: rotateY(180deg);
 }
 
-.wonderMove {
-    display: inline-block;
-    animation: wonderMove 2s infinite linear;
-}
-
-@keyframes wonderMove {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
-}
+/* ==========================================
+   IFRAME
+========================================== */
 
 iframe {
-    width: 200;
     height: 432px;
+
     border: 30px solid transparent;
     border-image: url(https://i.postimg.cc/15LJ6br1/Untitled276-20241031174517.png) 24 fill repeat;
 }
 
-iframe body::-webkit-scrollbar {
-    display: none;
-}
-
-.divider {
-    align-items: center;
-}
-
+/* ==========================================
+   IMAGENS
+========================================== */
 
 #cursors img {
     width: 100px;
 }
 
-.logoJogo {
-    width: 400px;
+/* ==========================================
+   ANIMAÇÕES
+========================================== */
+
+.wonderMove {
+    display: inline-block;
+    animation: wonderMove 2s linear infinite;
 }
 
-.draw {
-    border: 30px solid transparent;
-    border-image: url(https://i.postimg.cc/Th8qd5DX/lace.png) 25.5 fill repeat;
-    width: 200px;
-    margin-bottom: 1em;
+@keyframes wonderMove {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* ==========================================
+   RESPONSIVO
+========================================== */
+
+.width-auto {
+    width: -webkit-fill-available !important;
+}
+
+@media screen and (max-width: 1000px) {
+    .gameDiv {
+        flex-direction: column !important;
+    }
 }
 
 @media screen and (max-width: 800px) {
-    body .article {
+
+    * {
+        font-family: "Pixelify Sans", sans-serif;
+    }
+
+    body .main {
         width: 100%;
     }
+
     .disc {
-        height: 35dvw;
         width: 35dvw;
+        height: 35dvw;
     }
+
     #project {
         flex-direction: column;
     }
+
     .side-bar {
         display: none;
     }
 
-    .divider, .gameDiv {
+    .divider {
         flex-direction: column !important;
     }
-    
+
     .gameDiv.top {
         align-items: center !important;
     }
-}
 
+    .sm-100 { width: 100px !important; }
+    .sm-200 { width: 200px !important; }
+    .sm-300 { width: 300px !important; }
+    .sm-400 { width: 400px !important; }
+    .sm-500 { width: 500px !important; }
+}
