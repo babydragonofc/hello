@@ -305,7 +305,7 @@ iframe {
 ========================================== */
 
 .width-auto {
-    width: -webkit-fill-available !important;
+    width: calc(100% - 2em) !important;
 }
 
 @media screen and (max-width: 1000px) {
@@ -321,7 +321,7 @@ iframe {
     }
 
     body .main {
-        width: 100%;
+        width: 90dvw !important;
     }
 
     .disc {
@@ -350,4 +350,17 @@ iframe {
     .sm-300 { width: 300px !important; }
     .sm-400 { width: 400px !important; }
     .sm-500 { width: 500px !important; }
+}
+
+@media screen and (max-width: 500px) {
+    #meetMe {
+        flex-direction: column;
+    }
+    .logoJogo {
+        width: 300px;
+    }
+    #extra-container {
+        display: flex;
+        flex-direction: column;
+    }
 }

@@ -1,4 +1,4 @@
-const siteVer = 3;
+const siteVer = 4;
 
 setTimeout(() => {
     if (siteVer != localStorage.getItem("siteVer")) alert("Novas Mudanças ^^")
