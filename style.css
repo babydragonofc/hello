@@ -228,6 +228,17 @@ a {
     border-image: url(https://i.postimg.cc/Th8qd5DX/lace.png) 25.5 fill repeat;
 }
 
+.blinkie-area {
+    width: calc(100% - 2em);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.blinkie {
+    width: 150px;
+    height: 20px;
+}
+
 /* ==========================================
    SIDEBAR
 ========================================== */

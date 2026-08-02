@@ -1,3 +1,4 @@
+
 const siteVer = 4;
 
 setTimeout(() => {
@@ -7,11 +8,11 @@ setTimeout(() => {
 
 document.addEventListener("DOMContentLoaded", function() {
   [...document.querySelectorAll("wonder")].forEach((el) => {    
-      text = el.textContent
+      let text = el.textContent
       el.innerHTML = ""
   
-      palavra = [...text]
-      letras =[]
+      let palavra = [...text]
+      let letras =[]
       for (let i = 0; i < palavra.length; i++) {
           const l = document.createElement('span')
           l.textContent = palavra[i]
@@ -37,11 +38,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
 document.querySelectorAll(".rainbow").forEach(el => {
 
-    text = el.textContent
+    let text = el.textContent
     el.innerHTML = ""
 
-    palavra = [...text]
-    letras =[]
+    let palavra = [...text]
+    let letras =[]
     for (let i = 0; i < palavra.length; i++) {
         const l = document.createElement('span')
         l.textContent = palavra[i]
@@ -121,4 +122,3 @@ document.querySelectorAll('button, a, .cursor-select').forEach(el => {
     });
 
 })
-
