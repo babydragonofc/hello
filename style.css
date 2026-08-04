@@ -375,3 +375,47 @@ iframe {
         flex-direction: column;
     }
 }
+
+.panel {
+    height: 100px;
+    width: 400px;
+    border: 1px solid white;
+    border-radius: 25px;
+    background: #2A7B9B;
+    background: linear-gradient(0deg, rgba(45, 125, 156, 0.69) 0%, rgba(192, 240, 211, 0.63) 76%, rgba(101, 114, 119, 0.65) 100%);
+}
+
+#verity {
+    height: 64px;
+    width: 64px;
+    background-image: url(verity-face1.png);
+    background-size: cover;
+    position: fixed;
+    top: 600px;
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    z-index: 99999;
+}
+
+#verity.saying {
+    transform: scaleY(200%);
+    background-image: url(verity-face2.png);
+}
+
+#verity #message {
+    display: none;
+    height: 100px;
+    width: 200px;
+    border: 30px solid transparent;
+    border-image: url(ballon.png) 7 fill repeat;
+    position: relative;
+    top: -120px;
+    transform: scaleY(50%);
+    color: black;
+
+}
+
+#verity.saying #message {
+    display: block;
+}

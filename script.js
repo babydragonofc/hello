@@ -1,3 +1,15 @@
+const verity = document.getElementById('verity');
+const message = document.getElementById('message');
+
+veritySay("HELLO! I am Verity, your personal assistent", 5)
+
+function veritySay(text, sec) {
+    verity.classList.add('saying')
+    message.textContent = text;
+    setTimeout(() => {
+        verity.classList.remove('saying')
+    }, sec * 1000);
+}
 
 const siteVer = 4;
 
@@ -122,3 +134,4 @@ document.querySelectorAll('button, a, .cursor-select').forEach(el => {
     });
 
 })
+
