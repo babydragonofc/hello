@@ -135,3 +135,83 @@ document.querySelectorAll('button, a, .cursor-select').forEach(el => {
 
 })
 
+
+/*
+pixelar()
+async function pixelar(){
+
+    const div = document.getElementById("mp3_scream");
+    const canvas = document.getElementById("pixelCanvas");
+
+    // captura a div
+    const captura = await html2canvas(div,{
+        backgroundColor:null
+    });
+
+    const fator = 8;
+
+    const w = captura.width;
+    const h = captura.height;
+
+    canvas.width = w;
+    canvas.height = h;
+
+    const ctx = canvas.getContext("2d");
+
+    // desativa suavização
+    ctx.imageSmoothingEnabled = false;
+
+    // canvas temporário em baixa resolução
+    const temp = document.createElement("canvas");
+    temp.width = w / fator;
+    temp.height = h / fator;
+
+    const tctx = temp.getContext("2d");
+    tctx.imageSmoothingEnabled = false;
+
+    // reduz
+    tctx.drawImage(captura,0,0,temp.width,temp.height);
+
+    // aumenta novamente
+    ctx.drawImage(temp,0,0,temp.width,temp.height,0,0,w,h);
+}*/
+
+const audioPlayer = document.getElementById('audioPlayer');
+
+const musicList = [
+    {audio: "music/audios/24radio.mp3", img: "https://i.scdn.co/image/ab67616d0000e1a3c82af8cf3906e11b8164765f", title: "", artist: ""},
+    {audio: "music/audios/anjo.mp3", img:"", title:"Anjo de papel mache", artist:"Rodrigo Zin"},
+    {audio: "music/audios/lauro.mp3", img:"", title:"", artist:"AYAKASHI"},
+    {audio: "music/audios/photo.mp3", img: "", title:"Photophomia", artist:"AYAKASHI"},
+]
+let isPlaying = false;
+let currentMusic = 0;
+
+function playMusic() { 
+    isPlaying = !isPlaying
+    if (isPlaying) {
+        audioPlayer.play();
+    } else {
+        audioPlayer.pause();
+    }
+}
+
+function nextMusic() { 
+    ++currentMusic;
+    if (currentMusic >= musicList.length) currentMusic = 0;
+
+    audioPlayer.src = musicList[currentMusic].audio;
+    audioPlayer.play()
+}
+
+function prevMusic() {
+    --currentMusic;
+    if (currentMusic < 0) currentMusic = musicList.length - 1
+
+    audioPlayer.src = musicList[currentMusic].audio;
+    audioPlayer.play()
+}
+
+const mp3_place = document.getElementById('mp3_place')
+
+const mp3 = document.getElementById('mp3')

@@ -24,12 +24,22 @@
             <h1 class="title"><wonder class="rainbow">GUIA</wonder></h1>
             <button onclick="scrollF('start')">QUEM EU SOU?</button>
             <button onclick="scrollF('gostos')">GOSTOS</button>
-            <button onclick="scrollF('extras')">EXTRAS</button>
+            <button onclick="scrollF('extras')">EXTRAS</button> 
             <a href="galeria.html"><button>GALERIA</button></a>
         </div>
         <div class="second-side-bar">
-            <img src="mp3.png" alt="">
-            <div id="mp3_scream"></div>
+            <div id="mp3">
+                <audio src="music/audios/24radio.mp3"  id="audioPlayer"></audio>
+                <img src="mp3.png" alt="">
+                <div id="mp3_scream">
+                    <div id="music-img"></div>
+                </div>
+                <div id="mp3_controls">
+                    <button id="pause_btn" onclick="playMusic()"></button>
+                    <button id="prev_btn"></button>
+                    <button id="next_btn"></button>
+                </div>
+            </div>
         </div>
         <main class="main">
             <h1 class="title" id="start"><wonder class="rainbow"> Oi!!! > <</wonder></h1>
@@ -181,6 +191,31 @@
 
                 <span>Queria citar alguns outros jogos muito bons que fizeram parte da minha vida ^^. <span class="title">Terraria</span> Eu comecei a jogar por causa do meu amigo que comprou pra mim jogar com ele e mais um amigo, é concerteza um dos jogos mais divertidos que eu já joguei, eu passei mais tempo do que eu gostaria de adimitir jogando ele kkk. <span class="title">Tunic</span> Meu primeiro contato com esse jogo foi na casa de um amigo meu, ele jogava e eu ficava resenhando do jogo, esse ano eu peguei pra jogar ele, é bem bom, meio dificil kk, mas é bem divertido e as músicas são muito boas, não zerei ainda :( <span class="title">Katana zero</span> Eu amo esse jogo, a história é simplesmente perfeita, eu zerei ele no fim do ano passado. Eu conheci ele quando meu amigo mostrou no ultimo dia de aula de 2025, e ele deixou eu jogar um pouco, eu joguei bem mal, mas quando cheguei em casa e baixei, me dediquei a melhorar kk. Eu zerei ele ano passado.</span>
  
+                <img src="Gifts.png"  style="width: 300px">
+                <span>
+                    Aqui são presentinhos que eu gosto/amo de receber ^^.
+                    <br>
+                    
+                    <h2 class="title">Mensagens</h2>
+                    <span>mensagens de bom dia, boa tarde, boa noite, ou mensagens legais sobre o dia seu ou meu ^^</span>
+                    <br>
+                    <h2 class="title">Presentinhos a mão</h2>
+                    <span>cartinhas, bonequinhos, origamis, desenhos. Acessorios, QUALQUER COISA que tenha carinho, eu faço questão de guardar todos os presentinhos ^^</span>
+                    <br>
+                    <h2 class="title">Carinho</h2>
+                    <span>Eu amo receber carinho ^^, acho que eu vou fazer uma parte só pra isso :o</span>
+                    <br>
+                    <h2 class="title">Acessorios/ Roupas</h2>
+                    <span>Pulceiras, camisas, moletom. Eu amo essas coisas meio punks, tipo um monte de colar, pircing/brinco de pressão, aquelas calças cheias de bolsos, aneis, e como trans, isso melhora minha auto estima bastante (Eu visto P Adulto)
+                    <br>
+                    <h2 class="title">Eletronicos</h2>
+                    <span>qualquer coisinha que tenha um sitema eletronico eu gosto, mesmo que velho.</span>
+
+                    <h2 class="title">Qualquer coisa dada com carinho <3</h2>
+                    </span>
+
+                </span>
+
                 <div class="flex divider">
                     <img src="https://pixelsafari.neocities.org/dividers/lavenderhearts.gif" alt="" class="sm-100">
                     <h1 class="title"><wonder class="rainbow" id="extras">EXTRAS</wonder></h1>
@@ -201,6 +236,8 @@
                             <img src="tumblr-gif.gif" alt="" onclick="setCursor(3)">
                         </div>
                     </article>
+
+                    <div id="mp3_place"></div>
                 </div>
 
                 <div class="flex divider">

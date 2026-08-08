@@ -272,6 +272,79 @@ a {
     transform: rotateY(180deg);
 }
 
+.second-side-bar {
+    position: fixed;
+    right: 5dvw;
+
+    
+    z-index: 10;
+}
+
+#mp3 {
+    min-width: 200px;
+    min-height: 293px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    display: none;
+}
+
+#mp3 img {
+    width: 200px;
+}
+
+#mp3 #mp3_scream {
+    top: -8px;
+    position: absolute;
+    height: 132px;
+    width: 171px;
+    background-image: url(https://i.pinimg.com/736x/87/ba/a5/87baa5ef4325519870b1267ff162987f.jpg);
+    background-size: cover;
+    z-index: -1;
+}
+
+#mp3 canvas {
+    top: -8px;
+    position: absolute;
+}
+
+#pixelCanvas{
+    margin-top:20px;
+    border:1px solid #555;
+
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#mp3 #mp3_controls {
+
+}
+
+#mp3 #mp3_controls button {
+    position: absolute;
+    width: 41px;
+    height: 41px;
+    background-color: transparent;
+    border: 1px solid black;
+}
+
+#mp3 #mp3_controls #pause_btn{
+    top: 240px;
+    left: 80px;
+}
+
+#mp3 #mp3_controls #prev_btn {
+    top: 197px;
+    left: 37px;
+}
+
+#mp3 #mp3_controls #next_btn {
+    top: 197px;
+    left: 123px;
+}
+
 /* ==========================================
    IFRAME
 ========================================== */
@@ -344,7 +417,7 @@ iframe {
         flex-direction: column;
     }
 
-    .side-bar {
+    .side-bar, .second-side-bar {
         display: none;
     }
 
