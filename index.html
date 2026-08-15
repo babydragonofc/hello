@@ -13,7 +13,7 @@
     <div class="cursor-animado"></div>
     <img src="text.gif" class="cursor-select" onclick="alert('nem esse kk')">
 
-    <div id="verity" onclick="veritySay('HELLO! I am Verity, your personal assistent', 5)" style="display: none;">
+    <div id="verity" onclick="veritySay('HELLO! I am Verity, your personal assistent', 2)" style="display: none;">
         <div id="message"></div>
     </div>
     
@@ -36,8 +36,8 @@
                 </div>
                 <div id="mp3_controls">
                     <button id="pause_btn" onclick="playMusic()"></button>
-                    <button id="prev_btn"></button>
-                    <button id="next_btn"></button>
+                    <button id="prev_btn" onclick="prevMusic()"></button>
+                    <button id="next_btn" onclick="nextMusic()"></button>
                 </div>
             </div>
         </div>
@@ -48,14 +48,14 @@
             <img src="https://blob.gifcities.org/gifcities/DZZO5K3R7XSNQJRRWSAHWILLK7ZHI3WM.gif" alt="">
             <section id="meetMe">
                 <article>
-                    <header class="title">Quem eu sou?</header>
+                    <header class="title" id="titleHeader">Quem eu sou?</header>
                     <div>
                         Pergunta dificil, mas eu acho que eu sou uma pessoa sonhadora. <dark>Ou costumava ser...</dark> 
                         MAS, meu nome é Emilly Martins, eu nasci dia 3 de novembro de 2010, eu sou uma mulher trans, lesbica, e mto chata (✿￢_￢)<br>
                         eu não sei me descrever melhor :P . <dark>desculpa ser assim</dark>
-                        <div class="flex" style="padding: 0;">
+                        <div class="flex" style="padding: 0;" id="flags">
                             <img src="https://i.pinimg.com/originals/0c/be/e7/0cbee79cbc4201d10a4d42846862365d.gif" alt="" class="flag">
-                            <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMDZiMnU2eW45d2l5N2EwanQwam9uN2RwMThtdGFyZnU0Z2Jsd2ZzOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/PJImYrBPw940xrFzRZ/source.gif" alt="" class="flag">-->
+                            <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMDZiMnU2eW45d2l5N2EwanQwam9uN2RwMThtdGFyZnU0Z2Jsd2ZzOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/PJImYrBPw940xrFzRZ/source.gif" alt="" class="flag"></img>-->
                         </div>
                     </div>
                     <a href="malito:emillymartinsmikufan@gmail.com"><img src="https://blob.gifcities.org/gifcities/JGONMW4JKNGLPSJH5LWAZBK6ZXXPAZVK.gif" alt=""></a>
@@ -220,6 +220,17 @@
                     <img src="https://ae-pic-a1.aliexpress-media.com/kf/Hfa129003570d47319df04692c2e8a4d66.jpg" alt="" width="100px">
                     <img src="https://ae-pic-a1.aliexpress-media.com/kf/HTB11ggXbsLJ8KJjy0Fnq6AFDpXa3.jpg" alt="" width="100px">
                 </span>
+
+                <h2 class="title">Personagens</h2>
+
+                <div id="personagens">
+                    <img src="https://i.pinimg.com/736x/79/2a/8d/792a8d3c644eb6508798fee5f9fcd48f.jpg" alt="">
+                    <img src="https://i.pinimg.com/736x/85/06/52/8506525bcb5fb2542d7b4306c8aac8b2.jpg" alt="">
+                    <img src="https://i.pinimg.com/736x/25/2a/7f/252a7fe2f2ed1feb2ca449d0f5779be9.jpg" alt="">
+                    <img src="https://i.pinimg.com/736x/1c/58/e5/1c58e57d9ca646972193f489f127f7b6.jpg" alt="">
+                    <img src="https://i.pinimg.com/736x/8c/bc/04/8cbc04529d87db4ad4cbc458992815de.jpg" alt="">
+                    <img src="https://i.pinimg.com/736x/78/8e/29/788e29189aa80930c3d30e894a97a14a.jpg" alt="">
+                </div>
 
                 <div class="flex divider">
                     <img src="https://pixelsafari.neocities.org/dividers/lavenderhearts.gif" alt="" class="sm-100">
