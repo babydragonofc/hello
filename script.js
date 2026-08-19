@@ -177,15 +177,19 @@ async function pixelar(){
 }*/
 
 const audioPlayer = document.getElementById('audioPlayer');
+const music_img = document.getElementById('music-img')
 
 const musicList = [
-    {audio: "music/audios/24radio.mp3", img: "https://i.scdn.co/image/ab67616d0000e1a3c82af8cf3906e11b8164765f", title: "", artist: ""},
-    {audio: "music/audios/anjo.mp3", img:"", title:"Anjo de papel mache", artist:"Rodrigo Zin"},
-    {audio: "music/audios/lauro.mp3", img:"", title:"", artist:"AYAKASHI"},
-    {audio: "music/audios/photo.mp3", img: "", title:"Photophomia", artist:"AYAKASHI"},
+    {audio: "music/audios/24radio.mp3", img: "https://i.scdn.co/image/ab67616d0000e1a3c82af8cf3906e11b8164765f", title: "24 Radio", artist: ""},
+    {audio: "music/audios/anjo.mp3", img:"https://i.scdn.co/image/ab67616d0000e1a35c5f2ab295f5f6bd63d6fe4c", title:"Anjo de papel mache", artist:"Rodrigo Zin"},
+    {audio: "music/audios/lauro.mp3", img:"https://i.scdn.co/image/ab67616d0000e1a32206ae204a6434bebcf2b4b4", title:"No Fim do Labirinto", artist:"AYAKASHI"},
+    {audio: "music/audios/photo.mp3", img: "https://i.scdn.co/image/ab67616d0000e1a31c3fcaecbd50c9e8969d5bac", title:"Photophomia", artist:"AYAKASHI"},
 ]
 let isPlaying = false;
 let currentMusic = 0;
+
+playMusic()
+setMusicImage()
 
 function playMusic() { 
     isPlaying = !isPlaying
@@ -202,6 +206,8 @@ function nextMusic() {
 
     audioPlayer.src = musicList[currentMusic].audio;
     audioPlayer.play()
+    isPlaying = true
+    setMusicImage()
 }
 
 function prevMusic() {
@@ -210,11 +216,18 @@ function prevMusic() {
 
     audioPlayer.src = musicList[currentMusic].audio;
     audioPlayer.play()
+    isPlaying = true
+    setMusicImage()
+}
+
+function setMusicImage() {
+    music_img.style.backgroundImage = `url(${musicList[currentMusic].img})`
 }
 
 const mp3_place = document.getElementById('mp3_place')
 
 const mp3 = document.getElementById('mp3')
+
 
 function prepareStickerParent(parent) {
 

@@ -63,7 +63,7 @@ body {
     background-color: transparent;
     pointer-events: none;
     transition: transform .1s ease;
-    z-index: 90;
+    z-index: 99999999999991;
 }
 
 button,
@@ -154,8 +154,9 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
-#personagens img {
+#personagens img, #personagens div {
     width: 200px;
+    padding: 0;
 }
 
 /* ==========================================
@@ -269,7 +270,7 @@ a {
     background-image: url(note.png);
     background-size: cover;
 
-    z-index: 999;
+    z-index: 999999999;
 }
 
 .side-bar .wing {
@@ -288,7 +289,7 @@ a {
     position: fixed;
     right: 5dvw;
 
-    z-index: 999;
+    z-index: 999999999;
 }
 
 #mp3 {
@@ -316,6 +317,20 @@ a {
     background-image: url(https://i.pinimg.com/736x/87/ba/a5/87baa5ef4325519870b1267ff162987f.jpg);
     background-size: cover;
     z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mp3 #mp3_scream #image_wrapper {
+    perspective: 200px;
+}
+
+#mp3 #mp3_scream #music-img {
+    width: 70px;
+    height: 70px;
+    background-size: contain;
+    animation: rotateMusicImage 2s linear infinite;
 }
 
 #mp3 canvas {
@@ -397,6 +412,16 @@ iframe {
     }
 }
 
+@keyframes rotateMusicImage {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+
+}
 /* ==========================================
    RESPONSIVO
 ========================================== */
