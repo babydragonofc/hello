@@ -1,277 +1,980 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emilly's blog</title>
+    <title>Suspiros Da Eternidade o RPG</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" href="img/logoMedo.svg" type="image/svg+xml">
+    
 </head>
 <body>
-    <div class="cursor-animado"></div>
-    <img src="text.gif" class="cursor-select" onclick="alert('nem esse kk')">
 
-    <div id="verity" onclick="veritySay('HELLO! I am Verity, your personal assistent', 2)" style="display: none;">
-        <div id="message"></div>
-    </div>
-    
-    <div class="wrapper">
-        <div class="side-bar">
-            <img src="https://blob.gifcities.org/gifcities/EY6I27SBQLSNFRUG7I2D7M3UG7DHUPMF.gif" alt="" class="wing">
-            <img src="https://blob.gifcities.org/gifcities/EY6I27SBQLSNFRUG7I2D7M3UG7DHUPMF.gif" alt="" class="wing t">
-            <h1 class="title"><wonder class="rainbow">GUIA</wonder></h1>
-            <button onclick="scrollF('start')">QUEM EU SOU?</button>
-            <button onclick="scrollF('gostos')">GOSTOS</button>
-            <button onclick="scrollF('extras')">EXTRAS</button> 
-            <a href="galeria.html"><button>GALERIA</button></a>
+<div class="panel" id="main-panel">
+    <div class="box">
+        <p class="exit-box" onclick="panelClose()">x</p>
+
+        <div class="content" id="agradecimentos">
+            <h3 class="title" >Agradecimentos</h3>
+            <span class="text">Muito obrigado às pessoas incriveis que fizeram esse sonho real:<br>
+                <h2 style="margin: 0; margin-top: 0.5em;">Jogadores</h2><br>
+                Allícia Fleishman - Allícia Fleishman <fear></fear><br>
+                Heitor - Anthony, Astre, Roy Hummer<br>
+                Sara Yasmin - Evany Vicent<br>
+                Mauro Araujo - Dante Miralh, Guto Silva<br>
+                Debora Santos - Hadassa Santos, Amber Hummer<br>
+                Lilian Gomes - Irina<br>
+
+                <h2 style="margin: 0; margin-top: 0.5em;">Programação</h2><br>
+                Arthur "BabyDragon" Farias<br>
+                Emilly Martins
+
+            </span>
         </div>
-        <div class="second-side-bar">
-            <div id="mp3">
-                <audio src="music/audios/24radio.mp3"  id="audioPlayer"></audio>
-                <img src="mp3.png" alt="">
-                <div id="mp3_scream">
-                    <div id="image_wrapper">
-                        <div id="music-img"></div>
+
+        <div class="content" id="changeLog">
+            <header>
+                <h2 class="title">Atualizações</h2>
+                <span class="ver text sos"></span>
+            </header>
+            <hr class="cL marker">
+        </div>
+
+        <div class="content" id="ModsPanel" style="display: none; flex-direction: column; gap: 10px;">
+
+            <section style="display: flex; justify-content: space-between;">
+                <h2 class="title">
+                    Mods
+                </h2>
+            
+                <section style="display: flex; flex-direction: column; gap: 10px;">
+                    <section class="file-upload-wrapper">
+                        <input type="file" id="modFileInput" accept=".json" class="input" hidden onchange="document.getElementsByClassName('btn-personalizado')[0].classList.toggle('preenchido', this.value.length > 0)">
+                
+                        <label for="modFileInput" class="btn btn-personalizado"> Selecionar Arquivo </label>
+                    </section>
+                
+                    <button class="btn" onclick="importMod()">Importar Mod</button>
+                
+                    <button class="btn" onclick="downloadExampleMod()" > Baixar Mod Exemplo </button>
+                </section>
+            </section>
+
+        <section id="mods-list"></section>
+
+        </div>
+
+        <div class="content" id="knowledgeSelector">
+            <span>1 / 1 pericias escolhidas </span>
+            <button class="btn next hide">Proximo</button>
+            <button class="btn i"     >Artes</button>
+            <button class="btn ii"    >Medicina</button>
+            <button class="btn iii"   >Ciências</button>
+            <button class="btn iiii"  >História</button>
+            <button class="btn iiiii" >Burocracia</button>
+            <button class="btn iiiiii">Atualidades</button>
+        </div>
+        <!-- ================= MAGIA ================= -->
+        <div class="content" id="MagicCreate">
+            <section>
+            <p class="text white">Nome</p>
+            <input type="text" id="magicName" class="input">
+
+            <p class="text white">Descrição</p>
+            <textarea id="magicDescription" class="input" style="resize: none;"></textarea>
+
+            <p class="text white">Dado</p>
+            <input type="text" id="magicDice" class="input dice">
+            <br>
+            <button class="btn" onclick="createMagic()">Criar</button>
+            </section>
+        </div>
+
+        <!-- ================= HABILIDADE ================= -->
+        <div class="content" id="AbilityCreate" style="display: none;">
+            <section>
+            <p class="text white">Nome</p>
+            <input type="text" id="abilityName" class="input">
+
+            <p class="text white">Descrição</p>
+            <textarea id="abilityDescription" class="input" style="resize: none;"></textarea>
+
+            <p class="text white">Dado</p>
+            <input type="text" id="abilityDice" class="input dice">
+                <br>
+            <button class="btn" onclick="createAbility()">Criar</button>
+            </section>
+        </div>
+        <!-- ================= ITEM ================= -->
+        <div class="content" id="ItemCreate" style="display: none;">
+            <h1 class="title">Criar Item</h1>
+            <section >
+                <section id="infoGroup">
+                    <section class="infoBlock">
+                        <section class="addItemInfo">
+                            <p class="text white">Nome</p>
+                            <input type="text" id="itemName" class="input">
+                        </section>
+                        
+                        <section class="addItemInfo">
+                            <p class="text white">Peso</p>
+                            <input type="number" id="itemWeight" class="input">
+                        </section>
+
+                        <section class="addItemInfo">
+                            <p class="text white">Local</p>
+                            <select class="input" style="width:100%;" id="itemLocal" class="input">
+                                <option value="inventario">Inventário</option>
+                                <option value="guardado">Guardado</option>
+                            </select>
+                        </section>
+                    </section>
+                    <section class="infoBlock">
+                        <section class="addItemInfo" style="height: -webkit-fill-available;">
+                            <p class="text white">Descrição</p>
+                            <textarea id="itemDescription" class="input" style="resize: none;"></textarea>
+                        </section>
+                    </section>
+                </section>
+            
+                <hr>
+
+                <section id="categoriesDefinitions">
+                    <section id="categoriesGroup">
+                        <section>
+                            <button onclick="addItemCategory('item')" id="btnCategoryItem" class="active">Item</button>
+                        </section>
+                        <section>
+                            <button onclick="addItemCategory('arma')" id="btnCategoryWeapon">Arma</button>
+                        </section>
+                        <section>
+                            <button onclick="addItemCategory('municao')" id="btnCategoryMunition">Munição</button>
+                        </section>
+                    </section>
+        
+                    <section id="addItemDefinitions">
+                        <section id="addItemMenu">
+                            <p class="text white">Dado</p>
+                            <input type="text" id="itemCreateDice" class="input dice">
+                            <section>
+                                <p class="text white">Tipo</p>
+                                <select class="input" style="width:100%;" name="tipo" id="itemCreateType">
+                                    <option value="objeto">Objeto</option>
+                                    <option value="documento">Documento</option>
+                                    <option value="vestimenta">Vestimenta</option>
+                                    <option value="artefato">Artefato</option>
+                                </select>
+                            </section>
+                        </section>
+                        <section id="createWeaponMenu">
+                            <section>
+                                <p class="text white" style="margin-top: 0;">Tipo</p>
+                                <select class="input" style="width:100%;" name="tipo" id="weaponCreateType">
+                                    <option value="branca">Branca</option>
+                                    <option value="pistola">Pistola</option>
+                                    <option value="rifle">Rifle</option>
+                                    <option value="longo_alcance">Longo Alcance</option>
+                                </select>
+                                <p class="text white" style="margin-top: 0;">Munição</p>
+                                <input class="input" type="number" id="weaponCreateMMO">
+                            </section>
+                            <section>
+                                <p class="text white">Dano</p>
+                                <input class="input" type="text" id="weaponCreateDamage">
+                                <p class="text white">Dano Critico</p>
+                                <input class="input" type="text" id="weaponCreateCritical">
+                            </p>
+                            </section>
+                        </section>
+                        <section id="createMunitionMenu">
+                            <section>
+                                <p class="text white" style="margin-top: 0;">Arma</p>
+                                <select class="input" style="width:100%;" name="tipo" id="mmoCreateWeapon">
+                                    <option value="pistola">Pistola</option>
+                                    <option value="rifle">Rifle</option>
+                                    <option value="longo_alcance">Longo Alcance</option>
+                                </select>
+                                <p class="text white" style="display: none;">Quantidade</p>
+                                <input class="input" type="number" style="display: none;" id="mmoCreateQuantity">
+                            </section>
+                            <section>
+                                <p class="text white" style="margin-top: 0;">Tipo</p>
+                                <select class="input" style="width:100%;" name="tipo" id="mmoCreateType">
+                                    <option value="bala">Bala Solta</option>
+                                    <option value="cartucho">Cartucho</option>
+                                </select>
+                            </section>
+                        </section>
+                    </section>
+                    <br>
+                </section>
+            </section>
+            <br>
+            <button class="btn" onclick="addItem()">Criar</button>
+        </div>
+
+        <!-- ================= TRAUMA ================= -->
+        <div class="content" id="TraumaCreate" style="display: none;">
+            <section>
+            <p class="text white">Nome</p>
+            <input type="text" id="traumaName" class="input">
+
+            <p class="text white">Descrição</p>
+            <textarea id="traumaDescription" class="input" style="resize: none;"></textarea>
+
+            <p class="text white">Dado</p>
+            <input type="text" id="traumaDice" class="input dice">
+
+            <p class="text white">Tempo</p>
+            <input type="text" id="traumaTime" class="input">
+
+            <p class="text sm">Em caso de trauma permanente, coloque 'PER'</p>
+            <br>
+            <button class="btn" onclick="createTrauma()">Criar</button>
+            </section>
+        </div>
+
+    </div>
+  </div>
+
+    <main>
+        <img src="img/logo.svg" alt="" class="logo">
+        <button class="btn" onclick="abrirCriadorDeFicha()">Criar Ficha</button>
+        <button class="btn" onclick="load()">Carregar</button>
+        <section class="file-upload-wrapper">
+            <input type="file" id="arquivoJSON" class="btn" style="display: none;" accept=".json">
+            <label for="arquivoJSON" class="btn btn-personalizado">Importar Ficha</label>
+        </section>
+
+        <!--<button class="btn" onclick="irParaJogo()">Ir para o Jogo (Debug)</button>-->
+        
+        <footer>
+            <p class="textBtn" onclick='panelOpen("changeLog", null, null, true)' id="changeLogBtn">Change Log</p>
+            <p class="textBtn" onclick='panelOpen("agradecimentos", null, null, true)' id="changeLogBtn">Créditos</p>
+        </footer>
+    </main>
+
+    <div id="criaçãoDeFicha">
+        <div id="informaçõesBasicas">
+            <div id="ordoDoc-wrap">
+                <div id="ordoDoc">
+                    <span class="name">???</span>
+                    <span class="birth">??/??/????</span>
+                </div>
+            </div>
+            <h3 class="big-title">Informações</h3>
+            <hr>
+            <p class="text">Nome</p>
+            <input type="text" id="name" class="input">
+            <p class="text">Data de Nascimento</p>
+            <input type="date" id="date" class="input">
+            <div style="display: flex;" id="lastInfo">
+                <div>
+                    <p class="text">Idade</p>
+                    <input type="number" id="age" class="input">
+                </div>
+                <div>
+                    <p class="text">Sexo</p>
+                    <div style="display: flex;"> 
+                        <button class="btn sex-btn" data-sex="masculino"><img src="img/mas.svg" alt=""></button>
+                        <button class="btn sex-btn" data-sex="feminino"><img src="img/fem.svg" alt=""></button>
                     </div>
                 </div>
-                <div id="mp3_controls">
-                    <button id="pause_btn" onclick="playMusic()"></button>
-                    <button id="prev_btn" onclick="prevMusic()"></button>
-                    <button id="next_btn" onclick="nextMusic()"></button>
+            </div>
+            <button class="pBtn" id="p1">Proximo</button>
+        </div>
+        <div id="escolhaDeRaças">
+            <h3 class="title">Raças</h3>
+            <hr>
+            <span class="text">Em Suspiros da Realidade, existem 4 raças que vivem entre si em 'harmonia'</span>
+            <div id="race-box">
+                <div class="race-card">
+                    <button class="raceBtn">HUMANO</button>
+                    <div class="race-details">
+                        <div class="corner-images">
+                            <img src="img/corner.svg" class="corner-image top-left" alt="">
+                            <img src="img/corner.svg" class="corner-image top-right" alt="">
+                            <img src="img/corner.svg" class="corner-image bottom-left" alt="">
+                            <img src="img/corner.svg" class="corner-image bottom-right" alt="">
+                        </div>
+                        <h2 class="title">HUMANO</h2>
+                        <p> 
+                            &nbsp&nbsp&nbsp&nbspVersáteis, simples, “donos do mundo”.<br>
+                            Os humanos são a espécie mais comum e conhecida. Não possuem características físicas ou habilidades naturais muito diferentes das encontradas na nossa realidade, mas compensam essa ausência com sua capacidade de adaptação e variedade.<br>
+                            <br>
+                            Humanos podem desenvolver-se em diferentes áreas, podendo adquirir Poderes de Traumas.
+                        </p>
+                        <span>
+                            15 PV base; 5 PE base; 20 MD base; <br>
+                            3 pontos de Traços.
+                        </span>
+                        <button class="btn choose-btn" onclick="raceChose(0)">Escolher</button>
+                    </div>
+                </div>
+                <div class="race-card">
+                    <button class="raceBtn">ZOMANO</button>
+                    <div class="race-details">
+                        <div class="corner-images">
+                            <img src="img/corner.svg" class="corner-image top-left" alt="">
+                            <img src="img/corner.svg" class="corner-image top-right" alt="">
+                            <img src="img/corner.svg" class="corner-image bottom-left" alt="">
+                            <img src="img/corner.svg" class="corner-image bottom-right" alt="">
+                        </div>
+                        <h2 class="title">ZOMANO</h2>
+                        <p> 
+                            &nbsp&nbsp&nbsp&nbspCuriosos, ágeis e versáteis.<br>
+                            Zoomanos possuem características de animais integradas ao seu corpo. Essas características variam entre indivíduos e podem incluir orelhas, caudas, pelos, escamas, pequenas asas ou outras particularidades, oferecendo diferentes possibilidades de traços e habilidades.<br>
+                                <br>
+                            São mentalmente mais frágeis que os humanos, mas também mais adaptáveis e variados. Cada Zoomano possui características próprias que refletem a espécie animal da qual descende, podendo adquirir poderes de Trauma.<br>
+                        </p>
+                        <span>
+                        20 PV base; 15 de PE base; 10 MD base.<br>
+                        4 pontos de Traços.
+                        </span>
+                        <button class="btn choose-btn" onclick="raceChose(1)">Escolher</button>
+                    </div>
+                </div>
+                <div class="race-card">
+                    <button class="raceBtn">VAMPIRO</button>
+                    <div class="race-details">
+                        <div class="corner-images">
+                            <img src="img/corner.svg" class="corner-image top-left" alt="">
+                            <img src="img/corner.svg" class="corner-image top-right" alt="">
+                            <img src="img/corner.svg" class="corner-image bottom-left" alt="">
+                            <img src="img/corner.svg" class="corner-image bottom-right" alt="">
+                        </div>
+                        <h2 class="title">VAMPIRO</h2>
+                        <p> 
+                            &nbsp&nbsp&nbsp&nbspÁgeis, habilidosos, perigosos.<br>
+                            Vampiros são predadores naturalmente adaptados ao combate e à sobrevivência. Possuem um par de asas semelhantes às de morcegos, que podem ser recolhidas ao longo do corpo e permitem o voo e rápida corrida. São, em sua maioria, mais teimosos, rebeldes e difíceis de se lidar, sofrendo muito preconceito.<br>
+                            <br>
+                            Sua mobilidade é superior à humana, tendo +2 de mobilidade. Entretanto, sua resistência física é inferior à humana, possuindo -3 de defesa, não podendo adquirir Poderes de Trauma.
+                        </p>
+                        <span>
+                        10 PV base; 10 de PE base; 22 MD base.<br>
+                        3 pontos de Traços.
+                        </span>
+                        <button class="btn choose-btn" onclick="raceChose(2)">Escolher</button>
+                    </div>
+                </div>
+                <div class="race-card">
+                    <button class="raceBtn">DEMÔNIO</button>
+                    <div class="race-details">
+                        <div class="corner-images">
+                            <img src="img/corner.svg" class="corner-image top-left" alt="">
+                            <img src="img/corner.svg" class="corner-image top-right" alt="">
+                            <img src="img/corner.svg" class="corner-image bottom-left" alt="">
+                            <img src="img/corner.svg" class="corner-image bottom-right" alt="">
+                        </div>
+                        <h2 class="title">DEMÔNIO</h2>
+                        <p> 
+                            &nbsp&nbsp&nbsp&nbspFortes, resistentes, ameaçadores.<br>
+                            Demônios são humanoides semelhantes aos humanos, mas possuem características físicas que os distinguem, como chifres, pele ou olhos incomuns e outras particularidades. Sua constituição é naturalmente superior, tornando-os mais resistentes e capazes de suportar situações que seriam perigosas para outras espécies.<br>
+                            <br>
+                            Também são fisicamente mais fortes, possuindo +3 de Defesa Física. Entretanto, não podem adquirir Poderes de Traumas.
+                        </p>
+                        <span>
+                        20 PV base; 15 de PE base; 20 MD base.<br>
+                        2 pontos de Traços.
+                        </span>
+                        <button class="btn choose-btn" onclick="raceChose(3)">Escolher</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="escolhaDeOcupação">
+            <h1 class="big-title">Ocupações</h1>
+            <span class="text">&nbsp&nbsp&nbsp&nbspA Ocupação representa a vida, profissão ou experiência que o personagem possuía antes ou durante os acontecimentos da campanha. Cada origem concede perícias e habilidades relacionadas à sua área de conhecimento.</span>
+            <div id="ocupaçõesContainer"></div>
+        </div>
+        <div id="escolhaDeOrigem">
+            <div>
+                <h1 class="big-title">Origens</h1>
+                <span class="text" style="font-size: 10px; max-width: 300px; margin-top: 29px; display: none;">&nbsp&nbsp&nbsp&nbspA Origem representa as circunstâncias que moldaram o personagem antes da campanha. Ela pode representar sua criação, condição de vida ou acontecimentos que marcaram sua história.<br>&nbsp&nbsp&nbsp&nbsp Além de representar o passado do personagem, a Origem pode conceder acessos, contatos e conhecimentos que façam sentido com sua história. antes da campanha. Ela pode representar sua criação, condição de vida ou acontecimentos que marcaram sua história.</span>
+            </div>
+            <div id="origensContainer"></div>
+        </div>
+        <div id="escolhasDeMagia">
+            <div id="escolhaDeTipoMagico">
+                <h3 class="title">Tipo</h3>
+                <div class="types">
+                    <div class="type-card" onclick="typeChose(0)"><img src="img/alma.svg" alt=""></div>
+                    <div class="type-card" onclick="typeChose(1)"><img src="img/energia.svg" alt=""></div>
+                    <div class="type-card" onclick="typeChose(2)"><img src="img/corpo.svg" alt=""></div>
+                </div>
+                <div class="type-info">
+                    <div style="display: flex;align-items: flex-end;justify-content: space-between;flex-direction: row-reverse;">
+                        <h2 class="title" id="typeName">Tipo</h2>
+                        <p class="text" id="typeDescription">Manifestação do ser</p>
+                    </div>
+                    <hr>
+                    <p class="text sm" id="typeBonus">Seu tipo define suas formas de uso de magia, seus focos e aprimoramentos, define quem você é ussando magia</p>
+                    <button class="btn" id="typeConfirm" style="display: none;" onclick="typeConfirmF()">Escolher</button>
+                </div>
+
+            </div>
+            <div id="escolhaDeFocoMagico">
+                <div style="display: flex; justify-content: space-between;" id="focoTop">
+                    <h2 class="title">Focos</h2>
+                    <div style="display: flex;flex-direction: row;align-items: center;width: 47px;">
+                        <h2 class="title" id="pts">1</h2>
+                        <short class="MagiaFicha ConhecimentoMagico" id="ptsTxt">pontos <span class="icon-svg" style="--svg-icon: url('img/conhecimentoPts.svg')"></span> </short>
+                    </div>
+
+                </div>
+                <div class="focos">
+                    <div class="foco-card C" onclick="focoChose(0)"><img src="img/alma.svg" alt=""><span id="Suporte">0</span></div>
+                    <div class="foco-card CC" onclick="focoChose(1)"><img src="img/alma.svg" alt=""><span id="Controle">0</span></div>
+                    <div class="foco-card CCC" onclick="focoChose(2)"><img src="img/alma.svg" alt=""><span id="Elemental">0</span></div>
+                    <div class="foco-card CCCC" onclick="focoChose(3)"><img src="img/alma.svg" alt=""><span id="Dinamico">1</span></div>
+
+                    <button class="focoClose" onclick="focoClose()">Continuar</button>
+                </div>
+                <div id="foco-info-box">
+                    <div class="foco-info">
+                        <div style="display: flex;align-items: flex-end;justify-content: space-between; flex-direction: row-reverse;">
+                            <h2 class="title" id="focoName"></h2> <div class="foco-btns">
+                                <button class="focosM" onclick="removeMagicPt()">-</button>
+                                <button class="focosM" onclick="putMagicPt()">+</button>
+                            </div>
+                        </div>
+                        <hr id="fH" style="display: none;">
+                        <p class="text" id="focoDescription"></p>
+                                    
+                        <p class="text sm" id="focoEx"></p>
+                    </div>
+                    <div class="typeElements">
+                        <hr>
+                        <span>
+                            <span class="typeElementsInfo">
+                                <short class="MagiaFicha ConhecimentoMagico top"><span class="icon-svg" style="--svg-icon: url('img/star (1).svg')"></span></short> : 1 elemento Simples; 
+                            </span><br>
+                            <span class="typeElementsInfo">
+                                <short class="MagiaFicha ConhecimentoMagico top"><span class="icon-svg" style="--svg-icon: url('img/star (2).svg')"></span></short> : 1 elemento avançado; 
+                            </span><br>
+                            <span class="typeElementsInfo">
+                                <short class="MagiaFicha ConhecimentoMagico top"><span class="icon-svg" style="--svg-icon: url('img/star (3).svg')"></span></short> : 1 elemento simples e 1 avançado; 
+                            </span><br>
+                            <span class="typeElementsInfo">
+                                <short class="MagiaFicha ConhecimentoMagico top"><span class="icon-svg" style="--svg-icon: url('img/star (4).svg')"></span></short> : 2 elementos simples; 
+                            </span><br>
+                            <span class="typeElementsInfo">
+                                <short class="MagiaFicha ConhecimentoMagico top"><span class="icon-svg" style="--svg-icon: url('img/star (6).svg')"></span></short> : 2 elementos avançados;
+                            </span>
+                                
+                        </span>
+                    </div>
+                </div>
+                <button class="btn pBtn" id="foco-next-btn" style="display: none;">Próximo</button>
+            </div>
+            <div id="elementos">
+                <div class="elementsTitle">
+                    <h2 class="title">Elementos - <span class="title" id="element-points">0</span></h2>
+                    <p class="text sm" style="width: 148px; text-align: end;margin: 0 0 16px 0;">Os elementos são as forças matrizes do mundo, divididos em simples e avançados.</p>
+                </div>
+                <div class="elements">
+                    <div class="elementos-simples-titulo">
+                        <h3 class="title">Simples</h3>
+                        <hr>
+                    </div>
+                    <div class="elementos-simples">
+                        <button class="element-card" onclick="elementChose(0)"><img src="img/elemento (3).svg" alt=""></button>
+                        <button class="element-card" onclick="elementChose(1)"><img src="img/elemento (4).svg" alt=""></button>
+                        <button class="element-card" onclick="elementChose(2)"><img src="img/elemento (1).svg" alt=""></button>
+                        <button class="element-card" onclick="elementChose(3)"><img src="img/elemento (2).svg" alt=""></button>
+                        <button class="element-card" onclick="elementChose(4)"><img src="img/elemento (5).svg" alt=""></button>
+                        <button class="element-card" onclick="elementChose(5)"><img src="img/elemento (6).svg" alt=""></button>
+                        <button class="element-card" onclick="elementChose(6)"><img src="img/elemento (7).svg" alt=""></button>
+                    </div>
+                    <div class="elementos-avancados-titulo">
+                        <h3 class="title">Avançados</h3>
+                        <hr>
+                    </div>
+                    <div class="elementos-avancados">
+                        <button class="element-card" onclick="elementChose(7)"><img src="img/elemento (1).svg" alt=""></button>
+                        <button class="element-card" onclick="elementChose(8)"><img src="img/elemento (2).svg" alt=""></button>
+                        <button class="element-card" onclick="elementChose(9)"><img src="img/elemento (3).svg" alt=""></button>
+                    </div>
+                </div>
+                <div class="elementos-info-box">
+                    <div class="elementos-info">
+                        <div class="title-box">
+                            <img src="img/hr.svg" alt="">
+                            <h3 class="title" id="element-title"></h3>
+                            <img src="img/hr.svg" class="reverse" alt="">
+                        </div>
+                        <button class="btn pBtn" id="elementos-next-btn" onclick="elementNext()">Proximo</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <main class="main">
-            <h1 class="title" id="start"><wonder class="rainbow"> Oi!!! > <</wonder></h1>
-            <span><dark>textos <span style="color: rgb(123, 0, 255);" class="cursor-select" onclick="alert('esse não')">roxos</span> são links</dark></span>
-            <span style="color: red;">não compartilhe esse site com ninguém sem minha permissão, por favor</span>
-            <img src="https://blob.gifcities.org/gifcities/DZZO5K3R7XSNQJRRWSAHWILLK7ZHI3WM.gif" alt="">
-            <section id="meetMe">
-                <article>
-                    <header class="title" id="titleHeader">Quem eu sou?</header>
-                    <div>
-                        Pergunta dificil, mas eu acho que eu sou uma pessoa sonhadora. <dark>Ou costumava ser...</dark> 
-                        MAS, meu nome é Emilly Martins, eu nasci dia 3 de novembro de 2010, eu sou uma mulher trans, lesbica, e mto chata (✿￢_￢)<br>
-                        eu não sei me descrever melhor :P . <dark>desculpa ser assim</dark>
-                        <div class="flex" style="padding: 0;" id="flags">
-                            <img src="https://i.pinimg.com/originals/0c/be/e7/0cbee79cbc4201d10a4d42846862365d.gif" alt="" class="flag">
-                            <img src="https://media0.giphy.com/media/v1.Y2lkPTZjMDliOTUyMDZiMnU2eW45d2l5N2EwanQwam9uN2RwMThtdGFyZnU0Z2Jsd2ZzOSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/PJImYrBPw940xrFzRZ/source.gif" alt="" class="flag"></img>-->
+        <div id="escolhaDePericia">
+            <header>
+                <h2 class="big-title">Pericias</h2>
+                <div id="lvSelect">
+                    <p class="title" style="height: 49px; font-size: 65px; text-align: end;">Nível</p>
+                    <div id="lvSelectContent">
+                        <button onclick="levelSelect('-')">-</button>
+                        <p id="lvSelectNumber">1</p>
+                        <button onclick="levelSelect('+')">+</button>
+                    </div>
+                </div>
+            </header>
+
+            <div id="escolhaDePericia-Content">
+                <div id="perPlaces">
+                    <div id="perGrid">
+                        <div class="perLine">
+                            <div class="perLineTitle">5</div>
+                            <div class="place" id="place1"></div>
+                            <div class="place" id="place2"></div>
+                            <div class="place" id="place3"></div>
+                            <div class="place" id="place4"></div>
+                            <div class="place" id="place5"></div>
+                        </div>
+                        <div class="perLine">
+                            <div class="perLineTitle white">4</div>
+                            <div class="place" id="place6"></div>
+                            <div class="place" id="place7"></div>
+                            <div class="place" id="place8"></div>
+                            <div class="place" id="place9"></div>
+                            <div class="place" id="place10"></div>
+                        </div>
+                        <div class="perLine">
+                            <div class="perLineTitle">3</div>
+                            <div class="place" id="place11"></div>
+                            <div class="place" id="place12"></div>
+                            <div class="place" id="place13"></div>
+                            <div class="place" id="place14"></div>
+                            <div class="place" id="place15"></div>
+                        </div>
+                        <div class="perLine">
+                            <div class="perLineTitle white">2</div>
+                            <div class="place" id="place16"></div>
+                            <div class="place" id="place17"></div>
+                            <div class="place" id="place18"></div>
+                            <div class="place" id="place19"></div>
+                            <div class="place" id="place20"></div>
+                        </div>
+                        <div class="perLine">
+                            <div class="perLineTitle">1</div>
+                            <div class="place" id="place21"></div>
+                            <div class="place" id="place22"></div>
+                            <div class="place" id="place23"></div>
+                            <div class="place" id="place24"></div>
+                            <div class="place" id="place25"></div>
                         </div>
                     </div>
-                    <a href="malito:emillymartinsmikufan@gmail.com"><img src="https://blob.gifcities.org/gifcities/JGONMW4JKNGLPSJH5LWAZBK6ZXXPAZVK.gif" alt=""></a>
+                </div>
 
-                </article>
-                <div class="noPadding flex vertical">
-                    <article>
-                        <header class="title">Projetos</header>
-                        <div class="flex" id="project">
-                            <span>Eu amoooo fazer coisas kkk, em especial meu rpg inspirado em ordem paranormal. </span> 
-                            <img src="https://blob.gifcities.org/gifcities/4TYHWALHWWEAHAHV3KRYLTEVF4OJMW2U.gif" alt="">
-                        </div>
-                    </article>
-                    <article>
-                        <header class="title rainbow">Esse Site</header>
+                <div id="perLists" class="perList">
+                    <header>
+                        <section style="position: relative;">
+                            <p class="text" style="position: absolute; top: -4px;">Pericias</p>
+                            <h2 class="title">Fisicas</h2>
+
+                        </section>
+
                         <div>
-                            Vou tentar atualizar esse site, até eu perder completamente o interesse (°ᵕ °✿)<br>
-                            Sobre o site, vou por aqui coisas sobre mim, <a href="desabafos.html">Sentimentos</a> talvez, projetos, e.. eh, vou tentar ser honesta comigo.<br>
-                            Mande uma pergunta ou comentario no meu <a href="https://emillymartins.atabook.org">GuestBook</a> ^^<br>
-                            Esse site funciona melhor em computadores, então ligue a opção "para desktop"
-                            
+                            <button onclick="selectItemPlace(false)"><</button>
+                            <button onclick="selectItemPlace(true)">></button>
                         </div>
-                    </article>
-                </div>
-            </section>
-            <article class="blinkie-area">
-                <img src="https://pixelsafari.neocities.org/blinkies/stuckinthe80s.gif" class="blinkie">
-                <img src="https://pixelsafari.neocities.org/blinkies/artist.gif" class="blinkie">
-                <img src="https://pixelsafari.neocities.org/blinkies/nightsky.png" class="blinkie">
-                <img src="https://pixelsafari.neocities.org/blinkies/sunflowers.gif" class="blinkie">
-                <img src="https://pixelsafari.neocities.org/blinkies/media/systemofadown.jpg" class="blinkie">
-                <img src="https://pixelsafari.neocities.org/blinkies/media/kirby2.gif" class="blinkie">
-                <img src="https://pixelsafari.neocities.org/blinkies/tf2.gif" class="blinkie">
-                <img src="https://pixelsafari.neocities.org/blinkies/media/clumppenguin.gif" class="blinkie">
-                <img src="https://y2k.neocities.org/blinkiez/newbatch/Blinkie_132__site_.gif" class="blinkie">
-                <img src="https://y2k.neocities.org/blinkiez/newbatch/crzMphN.gif" class="blinkie">
-                <img src="https://y2k.neocities.org/blinkiez/newbatch/hugshappy.gif" class="blinkie">
-                <img src="https://y2k.neocities.org/blinkiez/newbatch/jesussaves.gif" class="blinkie">
-                <img src="https://blinkies.neocities.org/b/display/0178-mikuwink2.gif" class="blinkie">
-                <img src="https://blinkies.neocities.org/b/display/0145-kirbysquish.gif" class="blinkie">
-                <img src="https://blinkies.neocities.org/b/display/0127-splatoon1.gif" class="blinkie">
-                <img src="https://blinkies.neocities.org/b/display/0072-lesbian.gif" class="blinkie">
-                <img src="https://blinkies.neocities.org/b/display/0023-trans-pride.gif" class="blinkie">
-            </article>
-            <article class="width-auto">
-                <header class="title" id="gostos">GOSTOS!</header>
-    
-                <img src="https://blob.gifcities.org/gifcities/DYJ2CAMK5XY53CEXB7ZUSQGPJ26RFZV3.gif" alt="" class="width-auto">
-                <h4>Música (~˘▽˘)~/♪♫♬•*¨*•.¸¸♪♪♫♬•*¨*</h4>
-                <span><dark>clique nas capas</dark></span>
-    
-                <div class="flex vertical" style="gap: 0.5em;">
-                    <div class="flex noMargin noPadding gameDiv">
-                        <a href="https://www.youtube.com/channel/UC3sW-vnmTcekzWpjkKBWMUA"><img class="disc" src="disc_image8.png" alt=""></a>
-                        <div class="flex vertical">
-                            <h1 class="title">pairoT</h1>
-                            <span>Eu conheci esse canal a MUITO tempo, acho que em 2019, o canal principal dele, Tropia, eu simplesmente AMO ele, todas as musicas são incriveis a um nivel espetacular. Curiosidades, varias músicas tem referências com outras músicas dele, e são incriveis. Outra curiosidade é que pairoT é um anagrama de Tropia, assim como aiporT. <br> as músicas dele são nostalgicas e tristes, mas são bem legais, eu amo o album <a href="https://open.spotify.com/intl-pt/album/40X1wsO5vzGhtyTH8qjlhp?si=5dfce169697b4fb6">Brotas</a> e <a href="https://open.spotify.com/intl-pt/album/3pCoQsuEZly4UFqY798Qsa?si=b5acd4aa2c1642c3">Brotas: só +1(um) Pouco</a></span>
-                        </div>
+                    </header>
+
+                    <div id="perListFisicas" class="itemPlace">
+                        <div class="item" aria-value="força"><h2>Força</h2></div>
+                        <div class="item small-text" aria-value="constituição"><h2>Constituição</h2></div>
+                        <div class="item" aria-value="luta"><h2>Luta</h2></div>
+                        <div class="item" aria-value="pontaria"><h2>Pontaria</h2></div>
                     </div>
-                    <div class="flex noMargin noPadding reverse horizontal gameDiv">
-                        <a href="https://www.youtube.com/channel/UCakZwIMnbcvJyLL3h78OrGw"><img class="disc" src="disc_image3.png" alt=""></a>
-                        <div class="flex vertical">
-                            <h1 class="title">S0rrow</h1>
-                            <span>Eu conheci esse ano ainda (2026), é bem legal, tem uma pegada bem bacana, um estilo alternativo eu acho kk, geralmente sobre sentimentos e tals, eu acho bem interessante pra ouvir, as letras são bem legais de cantar kk. <br> Eu amo algumas músicas, tipo <a href="https://youtu.be/rALmnQk5InI?si=1opltZhdGMaPgzrW">Stalk your socials</a>, <a href="https://youtu.be/-HCvxCHOeEQ?si=rGow_lqO-SbojBV0">Unhappy</a> e <a href="https://youtu.be/UOKWjPdJmms?si=qF7dNJigjIE3YZCb">fake ur face</a></span>
-                        </div>
-                    </div>
-                    <div class="flex noMargin noPadding gameDiv">
-                        <a href="https://www.youtube.com/channel/UCugq5jDf4VySBga3lDcmq4g"><img class="disc" src="disc_image10.png" alt=""></a>
-                        <div class="flex vertical">
-                            <h1 class="title">Ayakashi</h1>
-                            <span>MEU DEUS, ESSE CARA, eu descobri ele antes do ano passado, eu não sabia muito bem o que era ordem, e eu só ouvia algumas músicas sem saber kkk, agora eu já conheço e é maravilhoso, ele só faz músicas de ordem paranormal, mas não são musicas contando a história, mas sim sobre os sentimentos, emoções, vontades, intenções. Ele tem um estilo eletronico, rock, as vezes mais classico, mas todas são boas, acho que (junto do pairot) não tem uma musica ruim (posso estar enganada :V). Curiosidade, ele conseguiu uma parceria ,ou algo assim, com a Jambo (publisher do livro de regras e hqs de ordem).<br> eu queria pôr todas as músicas aqui, mas aqui estão umas que eu mais gosto, <a href="https://youtu.be/4jK_lPCWioA?si=vnVpaSTusNFDQIqX">Photophobia</a>, <a href="https://youtu.be/dYTipf1ulKc?si=evr8rilAROZJB0tv">Espinhos da coroa</a>, <a href="https://youtu.be/xs6PzdeleHk?si=tLCO30xWiznDC-Hb">Memórias</a>, <a href="https://youtu.be/igIC-LFBFl4?si=6Pivurr-pPoGyi5y">Jardim espiral</a>, <a href="https://youtu.be/IU58TVxI_lU?si=vJKxt6n0FjL8sb3S">Colision</a>, <a href="https://youtu.be/QFohJdCpjio?si=YDCXJH0ASMyTaNze">Oculto</a>, <a href="https://youtu.be/xrgqLlyWVzg?si=6Yu90QdzLMH9zYfn">Manancial</a>, <a href="https://youtu.be/u6ten8pFDTM?si=jU7x8idQ4Jo4vN1G">Luz e Penitência</a>, e todo o resto ksks</span>
-                        </div>
-                    </div>
-                    <div class="flex noMargin noPadding reverse horizontal gameDiv">
-                        <a href="https://www.youtube.com/channel/UC7-YMmnc0ppcWmio8t1WdcA"><img class="disc" src="disc_image7.png" alt=""></a>
-                        <div class="flex vertical">
-                            <h1 class="title">System Of a Down</h1>
-                            <span>Rock, Simplesmente. Father, into Your hands I commend my spirit - Father, into Your hands - Why have You forsaken me? Eu conheci ano passado (eu acho <dark>(?</dark>), eu gosto bastante por ser meio aleatorio, legal de cantar e terem letras muito boas.<br> Amo essas músicas kks <a href="https://youtu.be/CSvFpBOe8eY?si=uwJaoE8UaD9Ui6FP">Chop Suey!</a>, <a href="https://youtu.be/iywaBOMvYLI?si=o5_0j8iZguXdsD-Y">Toxicity</a>, <a href="https://youtu.be/zUzd9KyIDrM?si=T4cpbiBze0PI191a">B.O.Y.B.</a> e <a href="https://youtu.be/DnGdoEa1tPg?si=OYXB1kAF21hkkOuQ">Lonely day</a>.<dark>Ainda sinto falta dela</dark></span>
-                        </div>
-                    </div>
-                    <div class="flex noMargin noPadding gameDiv">
-                        <a href="https://www.youtube.com/channel/UCMI-OeKt58Y-q2ZsbCdY2Tg"><img class="disc" src="disc_image1-21.png" alt=""></a>
-                        <div class="flex vertical">
-                            <h1 class="title">Shteppi</h1>
-                            <span>Conheci ela esse ano, bem legal, as músicas são bem diferentes, um estilo weirdCore bem legal, parece que deu um problema com umas músicas dela, que o sample era feito com IA, e ela n sabia, e tirou as músicas, então não tenho com pôr o link :<</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex divider">
-                    <img src="https://pixelsafari.neocities.org/dividers/hangingstars.gif" alt="" class="sm-100 ">
-                    <h1 class="title"><wonder class="rainbow">JOGOS ( ˶ˆᗜˆ˵ )</wonder></h1>
-                    <img src="https://pixelsafari.neocities.org/dividers/hangingstars.gif" alt="" class="sm-100">
-                </div>
-
-                <section>
-                    <span>EU SIMPLISMENTE <span class="title"><wonder class="rainbow">AMO</wonder></span> JOGOS, desde de pequenininha eu gostava de jogar, mas principalmente criar jogos ^^</span>
-                </section>
-
-                <img src="https://pixelsafari.neocities.org/dividers/boilingflowers.gif" alt="" class="width-auto">
-
-                <div class="flex top gameDiv">
-                    <img src="https://static.wikia.nocookie.net/logopedia/images/f/fd/BoI-Rebirth-Logo-e1419191913477-700x222.png/revision/latest?cb=20151128125632" alt="" class="logoJogo">
-                    <span>Comecei a jogar esse ano, esse mês na verdade, tava numa mega promoção na steam, então comprei a bundle completa pra um amigo meu, e comprei o jogo base pra mim, mas acabou que a gente juntou umas moedas e comprou a bundle pra mim tmb, esse jogo é um roguelike bem arrombado, eu sou muito ruim nele, mas ele é beeeem divertido e legal de jogar, eu acabo jogando quando tô estressada kkkk</span>
-                    <img src="https://i.pinimg.com/originals/0d/2e/d8/0d2ed875d62a3803192abce247f9acaf.gif" alt="" style="width: 50px; height: 50px;">
-                </div>
-
-                <img src="https://pixelsafari.neocities.org/dividers/boilingflowers.gif" alt="" class="width-auto">
-
-                <div class="flex horizontal reverse top gameDiv">
-                    <img src="https://1000logos.net/wp-content/uploads/2018/10/Minecraft-Logo-2013.png" alt="" class="logoJogo">
-                    <span>Eu cresci com minecraft, como qualquer criança dos anos 2010, eu me lembro de um mundo que eu tinha uma base dentro de uma montanha, tinha um rio, uma platação de cenoura, e uma porta kk, eu usava aquelas copias de minecraft, so que essa tinha textura de hora de aventura, eu lembro que quando comprei o jogo em 2019, o mundo tava lá. Minha primeira noite foi numa planicie, eu tinha nascido numa floresta de arvore escura (aquelas grossas) perto de uma montanha eu acho, e eu fiquei com medo dos endermans e zumbies, então eu me prendi num buraco no chão kk.<br>
-                    Esse jogo tá no meu coração, meu primeiro trabalho foi como designer num servidor de minecraft, eu me descobri lgbt por causa do jogo (de forma meio meme), eu zerei ele pela primeira vez com meus amigos no servidor, e eu fiz um mundo com <dark>ela</dark>. Hoje eu jogo com mods e meus amigos, sempre é muito legal descobrir esse mundo</span>
-                    <img src="https://i.pinimg.com/originals/00/d4/fa/00d4fa4d0dd818876d77c2067cc8ce4b.gif" alt="" style="width: 50px; height: 50px;">
-                </div>
-
-                <img src="https://pixelsafari.neocities.org/dividers/boilingflowers.gif" alt="" class="width-auto">
-
-                <div class="flex top gameDiv">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Club_Penguin_Logo_2012_-_2017.png" alt="" width="200px">
-                    <span>Infelismente eu nunca joguei esse jogo quando existia, mas eu joguei verções dele, eu fiz amigos lá e a minha skin tá no catalogo do orgulho, na pagina trans, um penguin com a camisa do brasil, chapeu do luffy, e pantufa do sans. Esse jogo me fez começar a criar jogos, um dos meus primeiros jogos foi uma copia single player desse jogo. Hoje eu tenho alguns projetos que são homenagens a ele, como o cozy coffe e o bunny island, esse jogo tá no meu coração <3</span>
-                    <img src="https://i.pinimg.com/originals/c1/f8/aa/c1f8aa061475c003d7ce92b374a7815f.gif" alt="" width="50px">
-                </div>
-
-                <img src="https://pixelsafari.neocities.org/dividers/boilingflowers.gif" alt="" class="width-auto">
-
-                <div class="flex top reverse gameDiv">
-                    <img src="https://stardewvalleywiki.com/mediawiki/images/6/68/Main_Logo.png" alt="" class="logoJogo">
-                    <span>Eu comecei a jgoar por causa do meu amigo que comprou pra mim , eu acho esse jogo muito bom, mas eu não consigo relaxar muito kkk, eu joguei um tempo atras. <dark>eu não consigo jogar sem lembrar de tudo o que a gente passou lá</dark></span>
-                </div>
-
-                <img src="https://pixelsafari.neocities.org/dividers/boilingflowers.gif" alt="" class="width-auto">
-
-                <span>Queria citar alguns outros jogos muito bons que fizeram parte da minha vida ^^. <span class="title">Terraria</span> Eu comecei a jogar por causa do meu amigo que comprou pra mim jogar com ele e mais um amigo, é concerteza um dos jogos mais divertidos que eu já joguei, eu passei mais tempo do que eu gostaria de adimitir jogando ele kkk. <span class="title">Tunic</span> Meu primeiro contato com esse jogo foi na casa de um amigo meu, ele jogava e eu ficava resenhando do jogo, esse ano eu peguei pra jogar ele, é bem bom, meio dificil kk, mas é bem divertido e as músicas são muito boas, não zerei ainda :( <span class="title">Katana zero</span> Eu amo esse jogo, a história é simplesmente perfeita, eu zerei ele no fim do ano passado. Eu conheci ele quando meu amigo mostrou no ultimo dia de aula de 2025, e ele deixou eu jogar um pouco, eu joguei bem mal, mas quando cheguei em casa e baixei, me dediquei a melhorar kk. Eu zerei ele ano passado.</span>
- 
-                <img src="Gifts.png"  style="width: 300px">
-                <span>
-                    Aqui são presentinhos que eu gosto/amo de receber ^^.
-                    <br>
                     
-                    <h2 class="title">Mensagens</h2>
-                    <span>mensagens de bom dia, boa tarde, boa noite, ou mensagens legais sobre o dia seu ou meu ^^</span>
-                    <br>
-                    <h2 class="title">Presentinhos a mão</h2>
-                    <span>cartinhas, bonequinhos, origamis, desenhos. Acessorios, QUALQUER COISA que tenha carinho, eu faço questão de guardar todos os presentinhos ^^</span>
-                    <br>
-                    <h2 class="title">Carinho</h2>
-                    <span>Eu amo receber carinho ^^, acho que eu vou fazer uma parte só pra isso :o</span>
-                    <br>
-                    <h2 class="title">Acessorios/ Roupas</h2>
-                    <span>Pulceiras, camisas, moletom. Eu amo essas coisas meio punks, tipo um monte de colar, pircing/brinco de pressão, aquelas calças cheias de bolsos, aneis, e como trans, isso melhora minha auto estima bastante (Eu visto P Adulto)
-                    <br>
-                    <h2 class="title">Eletronicos</h2>
-                    <span>qualquer coisinha que tenha um sitema eletronico eu gosto, mesmo que velho.</span>
-
-                    <h2 class="title">Qualquer coisa dada com carinho <3</h2>
-                    </span>
-
-                    <img src="https://ae-pic-a1.aliexpress-media.com/kf/S6377688ff6384863a7d1e86b795c5f5fM.jpg" alt="" width="100px">
-                    <img src="https://ae-pic-a1.aliexpress-media.com/kf/S63ab9e8e3bb94192bc4db39a651b6fb8T.jpg" alt="" width="100px">
-                    <img src="https://ae-pic-a1.aliexpress-media.com/kf/S83da7a02a3ce42298d6faef40810fc4bK.jpg" alt="" width="100px">
-                    <img src="https://ae-pic-a1.aliexpress-media.com/kf/Hfa129003570d47319df04692c2e8a4d66.jpg" alt="" width="100px">
-                    <img src="https://ae-pic-a1.aliexpress-media.com/kf/HTB11ggXbsLJ8KJjy0Fnq6AFDpXa3.jpg" alt="" width="100px">
-                </span>
-
-                <h2 class="title">Personagens</h2>
-
-                <div id="personagens">
-                    <img src="https://i.pinimg.com/736x/79/2a/8d/792a8d3c644eb6508798fee5f9fcd48f.jpg" alt="">
-                    <img src="https://i.pinimg.com/736x/85/06/52/8506525bcb5fb2542d7b4306c8aac8b2.jpg" alt="">
-                    <img src="https://i.pinimg.com/736x/25/2a/7f/252a7fe2f2ed1feb2ca449d0f5779be9.jpg" alt="">
-                    <img src="https://i.pinimg.com/736x/1c/58/e5/1c58e57d9ca646972193f489f127f7b6.jpg" alt="">
-                    <img src="https://i.pinimg.com/736x/8c/bc/04/8cbc04529d87db4ad4cbc458992815de.jpg" alt="">
-                    <img src="https://i.pinimg.com/736x/78/8e/29/788e29189aa80930c3d30e894a97a14a.jpg" alt="">
+                    <div id="perListArmas" class="itemPlace">
+                        <div class="item small-text" aria-value="armas_brancas"><h2>Armas Brancas</h2></div>
+                        <div class="item" aria-value="pistolas"><h2>Pistolas</h2></div>
+                        <div class="item" aria-value="rifle"><h2>Rifle</h2></div>
+                        <div class="item small-text" aria-value="longo_alcance"><h2>Longo Alcance</h2></div>
+                        
+                    </div>
+                    <div id="perListFisicas2" class="itemPlace">
+                        <div class="item" aria-value="destreza"><h2>Destreza</h2></div>
+                        <div class="item" aria-value="acrobacia"><h2>Acrobacia</h2></div>
+                        <div class="item small-text" aria-value="furtividade"><h2>Furtividade</h2></div>
+                        <div class="item" aria-value="pilotagem"><h2>Pilotagem</h2></div>
+                    </div>
+    
+                    <div id="perListSociais" class="itemPlace">
+                        <div class="item" aria-value="conversasão"><h2>Lábia</h2></div>
+                        <div class="item small-text" aria-value="intimidação"><h2>Intimidação</h2></div>
+                        <div class="item" aria-value="psicologia"><h2>Psicologia</h2></div>
+                    </div>
+        
+                    <div id="perListInvestigacao" class="itemPlace">
+                        <div class="item" aria-value="percepção"><h2>Percepção</h2></div>
+                        <div class="item" aria-value="crime"><h2>Crime</h2></div>
+                        <div class="item" aria-value="pesquisar"><h2>Pesquisar</h2></div>
+                        <div class="item" aria-value="tecnologia"><h2>Tecnologia</h2></div>
+                        <div class="item" aria-value="mecanica"><h2>Mecânica</h2></div>
+                    </div>
+        
+                    <div id="perListConhecimento" class="itemPlace">
+                        <div class="item small-text" aria-value="artes"><h2>Artes</h2></div>
+                        <div class="item small-text" aria-value="atualidades"><h2>Atualidades</h2></div>
+                        <div class="item" aria-value="ciencia"><h2>Ciências</h2></div>
+                        <div class="item" aria-value="humanas"><h2>Humanas</h2></div>
+                        <div class="item" aria-value="burocracia"><h2>Burocracia</h2></div>
+                        <div class="item" aria-value="medicina"><h2>Medicina</h2></div>
+                    </div>
+        
+                    <div id="perListMentais" class="itemPlace">
+                        <div class="item" aria-value="vontade"><h2>Vontade</h2></div>
+                        <div class="item" aria-value="ocultismo"><h2>Ocultismo</h2></div>
+                        <div class="item" aria-value="magia"><h2>Magia</h2></div>
+                        <div class="item small-text" aria-value="sobrevivencia"><h2>Sobrevivência</h2></div>
+                    </div>
                 </div>
-
-                <div class="flex divider">
-                    <img src="https://pixelsafari.neocities.org/dividers/lavenderhearts.gif" alt="" class="sm-100">
-                    <h1 class="title"><wonder class="rainbow" id="extras">EXTRAS</wonder></h1>
-                    <img src="https://pixelsafari.neocities.org/dividers/lavenderhearts.gif" alt="" class="sm-100">
-                </div>
-                
-                <div class="flex" id="extra-container">
-                    <iframe src="https://emillymartins.atabook.org" frameborder="0"></iframe>
-
-                    <article class="flex vertical">
-                        <header>
-                            <h3 class="title">CURSOR</h3>
-                        </header>
-
-                        <div class="flex vertical" id="cursors">
-                            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a11b1e6b-dd58-4721-9a02-f7a9d1705cc3/daf5fg7-fba18d54-f5c4-4132-ac04-f41e90873269.jpg/v1/fit/w_512,h_293,q_70,strp/roblox_stamp_3_0_by_darkyoshi973_daf5fg7-375w-2x.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MjkzIiwicGF0aCI6Ii9mL2ExMWIxZTZiLWRkNTgtNDcyMS05YTAyLWY3YTlkMTcwNWNjMy9kYWY1Zmc3LWZiYTE4ZDU0LWY1YzQtNDEzMi1hYzA0LWY0MWU5MDg3MzI2OS5qcGciLCJ3aWR0aCI6Ijw9NTEyIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.zzxvkE4jcGxD_5xsKIItGliOgfpTBr6Zv3z2mZ8uLVY" alt="" onclick="setCursor(1)">
-                            <img src="https://i.pinimg.com/736x/ba/9d/69/ba9d69de4b36441387f8e6e6256edeb4.jpg" alt="" onclick="setCursor(2)">
-                            <img src="tumblr-gif.gif" alt="" onclick="setCursor(3)">
-                        </div>
-                    </article>
-
-                    <div id="mp3_place"></div>
-                </div>
-
-                <div class="flex divider">
-                    <img src="https://i.imgur.com/jCqjGKT.gif" alt="" class="sm-200">
-                    <a href="galeria.html"><img src="https://i.postimg.cc/HjfJ47Xz/Documento.png" alt=""></a>
-                    <img src="https://i.imgur.com/jCqjGKT.gif" alt="" class="sm-200">
-                </div>
-                
-                <span>Clique no titulo ^^</span>
-                <img src="https://i.imgflip.com/axsj0d.jpg" alt="" width="150px">
-            </article>
-        </main>
+                <button class="btn" id="pr-next-btn" style="display: none;" onclick="finishPer()">Proximo</button>
+            </div>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-    <script src="script.js"></script>
-    <script src="https://louisabraham.github.io/nekojs/neko.js" data-autostart></script>
+    
+<div id="game">
+    <button id="enterPer" onclick="enterPer">Abrir Pericias e Status</button>
 
+  <!-- ================= MULTI TASK ================= -->
+  <div id="multiTask">
+    <header>
+      <button id="MobileMTBtn">
+        Magias/ Rituais
+        <img src="img/menu.svg" alt="" class="mMTImage">
+      </button>
+      <div id="mt-menu">
+        <button class="mTBtn active" onclick="gameHabaSel(0, this)" style="font-size: 10px; overflow: clip;">Magias/ Rituais</button>
+        <div class="Sline"></div>
+        <button class="mTBtn" onclick="gameHabaSel(1, this)">Habilidades</button>
+        <div class="Sline"></div>
+        <button class="mTBtn" onclick="gameHabaSel(2, this)">Inventário</button>
+        <div class="Sline"></div>
+        <button class="mTBtn" onclick="gameHabaSel(3, this)">Rolagens</button>
+        <div class="Sline"></div>
+        <button class="mTBtn" onclick="gameHabaSel(4, this)">Personagem</button>
+        <div class="Sline"></div>
+        <button class="mTBtn" onclick="gameHabaSel(5, this)">Diario*</button>
+        <div class="Sline"></div>
+        <button class="mTBtn" onclick="save()">Salvar</button>
+        <div class="line"></div>
+        <button class="mTBtn last" onclick="gameHabaSel(6, this)">Opções</button>
+      </div>
+    </header>
+
+    <main style="height: 100%;">
+      <!-- ============ MAGIAS ============ -->
+      <div class="mt-content active" id="magias-content">
+        <h3 class="title">Magias & Rituais</h3>
+        <div class="magias-content"></div>
+
+        <div class="central" style="justify-content: flex-end;">
+          <button class="btn" onclick="startMagicCreation()">+</button>
+        </div>
+      </div>
+
+      <!-- ============ HABILIDADES ============ -->
+      <div class="mt-content" id="habilidades-content" style="display: none;">
+        <h3 class="title">Habilidades</h3>
+        <div class="habilidades-content"></div>
+
+        <div class="central">
+          <button class="btn" onclick="startAbilityCreation()">+</button>
+        </div>
+      </div>
+
+      <!-- ============ INVENTÁRIO ============ -->
+      <div class="mt-content" id="inventario-content" style="display: none;">
+        <div class="inv-side">
+          <div style="display: flex; height: 100%; flex-direction: column;">
+            <p class="text" style="margin-left: 1em;">Inventário</p>
+            <div id="inventory"></div>
+            <button onclick="startItemCreation()">+</button>
+          </div>
+
+          <div style="width: -webkit-fill-available; width: -webkit-fill-available; height: calc(97% - 2em - 2px); display: flex; flex-direction: column;">
+            <p class="text">Usando</p>
+            <textarea id="useInput" style="resize: none;" placeholder="Escreva aqui ..."></textarea>
+
+            <p class="text">Arma</p>
+            <div class="arma-area">
+              <p class="text pre">Adicione uma arma clicando no Inventário</p>
+              <p class="text pre">+</p>
+            </div>
+
+            <p class="text">Peso</p>
+            <div class="peso-area" onclick="document.getElementById('additional-weight-panel').style.display = 'flex'; document.getElementById('additionalWeightInput').value = ficha.inventario.additionalWeight;">
+              <p class="text sm" id="pesoAddDisplay">/0</p>
+              <h2 class="title" id="pesoDisplay">0</h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="inv-side d">
+          <p class="text">Guardados</p>
+          <div id="guardados"></div>
+        </div>
+      </div>
+
+      <!-- ============ ROLAGENS ============ -->
+      <div class="mt-content" id="dados-content" style="display: none;">
+          <h3 class="title">Rolagem de Dado</h3>
+          <input type="text" id="diceInput" class="dice">
+          <button class="btn" id="diceBtnRoll" onclick="rollDice()">Rolar Dado</button>        
+          <p class="text">Os padrões de escrita de dados são: 'd' para dado e '+' ou '-' para modificadores. Ex: 2d20+5, 1d12-2, 1d6+1d4.</p>
+      </div>
+
+      <!-- ============ PERSONAGEM ============ -->
+      <div class="mt-content" id="personagem-content" style="display: none;">
+          <div class="personagem-content">
+              <div class="personagem-info-basica">
+                <h3 class="title">Personagem</h3>
+                <hr style="margin-bottom: 50px;">
+                <p><strong>Nome:</strong> <span id="personagem-nome"></span></p>
+                <p><strong>Idade:</strong> <span id="personagem-idade"></span></p>
+                <p><strong>Raça:</strong> <span id="personagem-raca"></span></p>
+                <p><strong>Tipo:</strong> <span id="personagem-tipo"></span></p>
+                <p><strong>Foco:</strong> <span id="personagem-foco"></span></p>
+                
+                <button class="btn" id="editarPericiasBtn">Editar pericias</button>
+                
+
+            </div>
+            <div class="personagem-biografia">
+                <div class="divMark" >
+                    <h2 class="text">Biografia</h2>
+                    <button class="btn" onclick="ChangeBiogrMode()" id="bioStateBtn">Fechar</button>
+                </div>
+                <div id="bio-content">
+                    <label for="personagem-familia">Familia:</label>
+                    <textarea id="personagem-familia" class="biografia-input" rows="2"></textarea>
+                    <label for="personagem-gostos">Gostos:</label>
+                    <textarea id="personagem-gostos" class="biografia-input" rows="2"></textarea>
+                    <label for="personagem-desgostos">Desgostos:</label>
+                    <textarea id="personagem-desgostos" class="biografia-input" rows="2"></textarea>
+                    <label for="personagem-medos">Medos:</label>
+                    <textarea id="personagem-medos" class="biografia-input" rows="2"></textarea>
+                    <label for="personagem-contatos">Contatos Proximos:</label>
+                    <textarea id="personagem-contatos" class="biografia-input" rows="2"></textarea>
+                    <label for="personagem-historia">Historia:</label>
+                    <textarea id="personagem-historia" class="biografia-input" rows="5"></textarea>
+                    <label for="personagem-comportamento">Comportamento:</label>
+                    <textarea id="personagem-comportamento" class="biografia-input" rows="3"></textarea>
+                </div>
+                    <div class="divMark" >
+                    <h2 class="text">Outros</h2>
+                    <button class="btn" onclick="ChangeOtherMode()" id="otherStateBtn">Fechar</button>
+                </div>
+                <div id="other-content">
+                    <label for="personagem-dinheiro">Dinheiro:</label>
+                    <textarea id="personagem-dinheiro" class="biografia-input" rows="1"></textarea>
+                    <label>Traumas</label>
+                    <div id="traumas-content"></div>
+                    <br>
+                    <button class="btn" onclick="startTraumaCreation()">+</button>
+                        
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- ============ Diario ============ -->
+
+      
+      <div class="mt-content" id="diario-content" style="display: none;align-items: center;">
+        <h3 class="title">Diario</h3>
+        <div style="display: flex;">
+            <input type="text" id="pagina-input">
+            <button class="btn" id="pagina-btn">Entrar</button>
+        </div>
+        <iframe src="" id="pagina-iframe"></iframe>
+      </div>
+
+
+      <!-- ============ OPÇÕES ============ -->
+       <div class="mt-content" id="options-content" style="display: none;">
+            <h3 class="title">Opções</h3>
+            <div id="options-container">
+                <p>Papel De Parede</p>
+                <div class="flex">
+                    <button class="btn" onclick="setWallpaper(0)">Medo</button>
+                    <button class="btn" onclick="setWallpaper(1)">Realidade</button>
+                    <button class="btn" onclick="setWallpaper(2)">Energia</button>
+                    <button class="btn" onclick="setWallpaper(3)">Sangue</button>
+                </div>
+                <p>Interface</p>
+                <div class="flex">
+                    <button class="btn" onclick="turnStatusMod()">Modificador Status</button>
+                    <button class="btn" onclick="turnPerTranslucid()" id="translucidPerBtn">Pericias translucidas (off)</button>
+                </div>
+                <p>Personalização</p>
+                <div class="flex">
+                    <div class="testeDiv">
+                        <button class="btn" onclick="turnPerBlur()" id="blurPerBtn">Blur nas pericias (off)</button>
+                        <button class="btn" style="padding: 2px; margin: 0;" onclick="document.getElementById('perBlurOpt').style.display = 'flex'">☰</button>
+                        <div class="teste" id="perBlurOpt">
+                            <input type="range" id="perBlurInput" min="1" max="15">
+                            <button id="blurInputBack" onclick="document.getElementById('perBlurOpt').style.display = 'none'">></button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <p>Imagem</p>
+                <div>
+                    <input class="input" type="text" id="image-field">
+                </div>
+                
+                <p>Dados</p>
+                <button class="btn" id="changeAutoSaveBtn" onclick="changeAutoSave()">Salvamento Automatico Desligado</button>
+                <button class="btn" id="changeFastLoginBtn" onclick="changeFastLogin()">Carregamento Rápido Desligado</button>
+                <button class="btn" onclick="baixarObjetoComoJSON(ficha, 'ficha_save')">Exportar Ficha</button>
+
+                <p>Mods</p>
+                <button class="btn" onclick="openModsMenu()">Gerenciar Mods</button>
+            </div>
+       </div>
+    </main>
+  </div>
+
+  <div id="periciasDisplayer">
+    <button class="close-btn-per" onclick="closePer()">x</button>
+    <div id="perTop">
+        <div id="playerImg">
+        </div>
+        <div id="statusModifierEdit">
+            <button onclick="changestatusModifier(1)" id="1-dM" class="diceModiferBtn btn white on">1</button>
+            <button onclick="changestatusModifier(5)" id="5-dM" class="diceModiferBtn btn white">5</button>
+            <button onclick="changestatusModifier(10)" id="10-dM" class="diceModiferBtn btn white">10</button>
+            <button onclick="changestatusModifier(50)" id="50-dM" class="diceModiferBtn btn white">50</button>
+        </div>
+        <div class="barBlock">
+            <div id="hpBar" class="bar">
+                <div class="barDiv">
+                    <p id="hpValue">10</p>
+                </div>
+                <div id="hpBarFill" class="barFill"></div>
+            </div>
+            <div class="statusBtns">
+                <button class="barBtn" onclick="changeStatusValue('-', 'vida')"><</button>
+                <button class="barBtn" onclick="changeStatusValue('+', 'vida')">></button>
+            </div>
+        </div>
+        <div class="barBlock">
+            <div id="peBar" class="bar">
+                <div class="barDiv">
+                    <p id="epValue"></p>
+                </div>
+                <div id="peBarFill" class="barFill"></div>
+            </div>
+            <div class="statusBtns">
+                <button class="barBtn" onclick="changeStatusValue('-', 'energia')"><</button>
+                <button class="barBtn" onclick="changeStatusValue('+', 'energia')">></button>
+            </div>
+        </div>
+        <div class="barBlock">
+            <div id="spBar" class="bar">
+                <div class="barDiv">
+                    <p id="spValue"></p>
+                </div>
+                <div id="spBarFill" class="barFill"></div>
+            </div>
+            <div class="statusBtns">
+                <button class="barBtn" onclick="changeStatusValue('-', 'medo')"><</button>
+                <button class="barBtn" onclick="changeStatusValue('+', 'medo')">></button>
+            </div>
+        </div>
+        <div id="custom-status-container" style="width: 100%;"></div>
+
+        <div id="modificadores">
+
+        </div>
+    </div>
+
+    <div id="pericias-display"></div>
+  </div>
+    </div>
+  </div>
+
+    <div id="tooltip" class="tooltip">
+        <div>
+            <div class="title"></div>
+            <span class="subtitle"></span>
+        </div>
+        <hr>
+        <div style="display: flex; align-items: flex-end; flex-direction: column;">
+            <p class="text"></p>
+            <p class="text sm"></p>
+        </div>
+        <div style="display: flex; align-items: start;"></div>
+    </div>
+    <div id="element-tooltip"></div>
+
+    <div id="dice-multiplier-panel" class="panel" style="display: none;">
+        <div class="box">
+            <p class="exit-box" onclick="closeDiceMultiplierPanel()">x</p>
+            <p class="text" style="color: white;">Quantos dados?</p>
+            <div id="dice-multiplier-options"></div>
+        </div>
+    </div>
+
+    <div id="additional-weight-panel" class="panel" style="display: none;">
+        <div class="box">
+            <p class="exit-box" onclick="const panel = document.getElementById('additional-weight-panel').style.display = 'none';">x</p>
+            <p class="text" style="color: white;">Editar Peso Adicional</p>
+            <input type="number" id="additionalWeightInput" class="input" placeholder="Novo peso">
+            <button class="btn" onclick="renderMaxWeight()">Salvar</button>
+        </div>
+    </div>
+
+    <div id="divDeRolagem" onclick="hideDiceResult()">
+            <div>
+                <h1 id="resultadoFinalDeRolagem" class="title"></h1>
+                <span id="descriçãoDeRolagem" class="text sm">--</span>
+                <p id="rollResultTypeBackText">Clique em qualquer lugar para voltar.</p>
+            </div>
+    </div>
+
+    <div id="periciasEditorBox">
+        <div class="periciasEditorBoxContent">
+            <h2 class="title">Editar Pericias</h2>
+            <button class="closeBox" onclick="salvarPericiasEditadas(), salvarStatusMaxEditados()">Salvar e Voltar</button>
+        </div>
+            <div id="periciasEditor"></div>
+            <div id="statusMaxEditor"></div>
+    </div>
+
+    <div id="update-notification" style="display: none;">
+        <p id="update-notification-text"></p>
+        <button onclick="document.getElementById('update-notification').style.display = 'none'" class="btn base">Fechar</button>
+    </div>
+
+</div>
+
+<div id="loadingScream" >
+    <p class="text">Carregando...</p>
+    <img src="img/medo.svg" id="loadingScreamIcon">
+</div>
+
+
+    <script src="rules.js"></script>
+    <script src="changeLog.js"></script>
+    <script src="tooltip.js"></script>
+    <script src="ficha.js"></script>
+    <script src="pericias.js"></script>
+    <script src="script.js"></script>
+    <script src="rolagem.js"></script>
+    <script src="listas.js"></script>
+    <script src="inventory.js"></script>
+    <script src="options.js"></script>
+    <script src="mods.js"></script>
+    <script src="game.js"></script>
 </body>
 </html>
+</body>
+</html>
+
