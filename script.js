@@ -1,5 +1,5 @@
 function pS() {
-    console.log("opening prefabSave");
+    ("opening prefabSave");
     document.getElementById('arquivoJSON').value = 'ficha_save (1).json';}
 
 // ====================== FICHA ======================
@@ -171,8 +171,6 @@ function raceChose(rs) {
 
     ficha.ConhecimentoMagico = 6
     ficha.raça = raças[rs]
-
-    console.log("incompleto")
 }
 
 // ====================== Ocupações ======================
@@ -305,7 +303,7 @@ const ocupações = [
         descricao: "Você aprendeu que toda história possui algo escondido. Entrevistar pessoas, buscar informações e investigar acontecimentos fazem parte da sua experiência.",
         bonus: "",
         pericias: ["conversação", "psicologia"],
-        habilidades: ["Entrevista", "RedeDeContatos"]
+        habilidades: ["RedeDeContatos", "Inspiração"]
     },
 
     {
@@ -448,7 +446,6 @@ async function selectOcupation(id) {
 
     try {
         const pericias = await seleçãoConhecimento(choices, choicePos == 0? 2: 1);
-        console.log(choicePos)
         ficha.ocupação = ocupações[id-1]
         ficha.ocupação.pericias.splice(choicePos, 1)
 
@@ -458,7 +455,7 @@ async function selectOcupation(id) {
         
         finalizarSeleçãoDeOcupação()
     } catch (erro) {
-        console.log("Seleção cancelada:", erro.message);
+        ("Seleção cancelada:", erro.message);
     }    
 }
 
@@ -466,7 +463,6 @@ function finalizarSeleçãoDeOcupação() {
 
         ficha.ocupação.pericias.forEach(pericia => {
             const bonusPerEl = document.querySelector('[aria-value="'+pericia+'"]');
-            console.log(pericia, bonusPerEl)
             bonusPerEl.style.color = "yellow"
             bonusPerEl.style.boxShadow = '0 0 10px inset #ffff0042;'
         });
@@ -517,7 +513,6 @@ async function seleçãoConhecimento(pericias ,quant) {
             sP.style.display = "none"
         })
 
-        console.log(pericias)
         for (let i = 0; i < pericias.length; i++) {
             const obj = seletoresDePericia[i]
 
@@ -1244,10 +1239,8 @@ function irParaJogo() {
 
     displayPericias();
 
-    //Atualização autmomatica de ficha 
-    if(configuraçõesDeAtualizações.fichaComEnergia) {
-        statusDef()
-    }
+    statusDef()
+    
 }
 
 function renderPersonagem() {
@@ -1933,3 +1926,93 @@ function test() {
     overshadowText(el, 1, 5000, 2);
   });
 }
+
+function atualizarDado(el) {
+    // Obtém o valor do dado
+    const value = el.hasAttribute('data-dice')
+        ? el.dataset.dice
+        : el.dataset.set;
+
+    const color = el.classList[0] || "white";
+
+    // Adiciona ou remove a classe desvantagem
+    el.classList.toggle(
+        'desvantagem',
+        value?.trim().startsWith('-') || false
+    );
+
+    // Procura a imagem e o fallback existentes
+    let img = el.querySelector(':scope > img');
+    let fallback = el.querySelector(':scope > .dice-fallback');
+
+    // Cria a imagem caso não exista
+    if (!img) {
+        img = document.createElement('img');
+        el.appendChild(img);
+    }
+
+    // Cria o fallback caso não exista
+    if (!fallback) {
+        fallback = document.createElement('span');
+        fallback.className = 'dice-fallback';
+        fallback.textContent = '--';
+        el.appendChild(fallback);
+    }
+
+    // Se não houver valor, exibe --
+    if (!value || !value.trim()) {
+        img.style.display = 'none';
+        fallback.style.display = '';
+        return;
+    }
+
+    const valorImagem = value.replace(/^-/, '');
+    const src = `img/dices/${color}_${valorImagem}.png`;
+
+    // Define os eventos de carregamento
+    img.onload = () => {
+        img.style.display = '';
+        fallback.style.display = 'none';
+    };
+
+    img.onerror = () => {
+        img.style.display = 'none';
+        fallback.style.display = '';
+    };
+
+    // Atualiza a imagem
+    img.src = src;
+}
+
+// Inicializa os dados existentes
+document.querySelectorAll('dice').forEach(atualizarDado);
+
+// Observa alterações nos dados e novos elementos
+const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+
+        // Detecta alterações nos atributos
+        if (mutation.type === 'attributes') {
+            atualizarDado(mutation.target);
+        }
+
+        // Detecta novos elementos adicionados
+        mutation.addedNodes.forEach(node => {
+            if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+            if (node.matches('dice')) {
+                atualizarDado(node);
+            }
+
+            node.querySelectorAll?.('dice').forEach(atualizarDado);
+        });
+
+    });
+});
+
+observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['data-dice', 'data-set', 'class']
+});

@@ -7,30 +7,31 @@ const tooltipDictionary = {
         Constituição: { descricao: "Sua capacidade de resistir a golpes, ferimentos, no geral." },
         Luta: { descricao: "Sua capacidade/conhecimento sobre luta, seja artes marciais ou técnicas de luta corpo a corpo." },
         Pontaria: { descricao: "Sua capacidade de jogar/disparar projéteis precisamente sem armas de fogo. (Pode ser usada para percepção DT sobre em 5)" },
-
+        
         // De Armas
         ArmasBrancas: { descricao: "Sua capacidade de utilizar armas brancas em combate, como facas, espadas, machados, etc." },
         Pistolas: { descricao: "Sua capacidade de utilizar armas de fogo curtas, como pistolas e revólveres." },
         Rifles: { descricao: "Sua capacidade de utilizar armas de fogo grandes, como rifles, fuzis, escopetas, etc." },
         LongoAlcance: { descricao: "Sua capacidade de utilizar snipers, e armas longas no geral." },
-
+        
         // De Mobilidade
         Destreza: { descricao: "Refere-se às suas habilidades de mobilidade, agilidade." },
         Acrobacia: { descricao: "Sua capacidade de fazer manobras difíceis e performar movimentos precisos." },
         Furtividade: { descricao: "Sua capacidade de passar despercebido e se espreitar em ambientes." },
         Pilotagem: { descricao: "Sua capacidade de pilotar veículos." },
-
+        
         // Sociais
         Conversação: { descricao: "Sua capacidade de comunicação, debate, mentir, convencer, etc." },
         Intimidação: { descricao: "Sua capacidade de impor ordens pelo medo." },
         Psicologia: { descricao: "Sua capacidade de interpretar sinais da mente humana, mentiras." },
-
+        
         // Investigativas
         Percepção: { descricao: "Sua habilidade em notar pequenos detalhes, ouvir, escutar, e perceber o ambiente." },
         Crime: { descricao: "Sua capacidade de identificar/cometer delitos e fraudes." },
         Tecnologia: { descricao: "Sua capacidade de utilizar, entender e burlar sistemas eletrônicos e digitais." },
         Mecânica: { descricao: "Sua capacidade de utilizar, criar, entender e modificar mecanismos complexos." },
         Pesquisa: { descricao: "Sua capacidade de pesquisar informações em bibliotecas e arquivos." },
+        Sobrevivencia: { descricao: "Seu conhecimento sobre a natureza e formas de sobreviver/improvisar nela." },
 
         // De Conhecimento
         Atualidades: { descricao: "Seu conhecimento geral sobre nichos culturais, como filmes, jogos etc." },
@@ -44,7 +45,7 @@ const tooltipDictionary = {
         Vontade: { descricao: "Sua resistência/resiliência mental, sua capacidade de se manter consciente das suas vontades e objetivos." },
         Ocultismo: { descricao: "Seu conhecimento, habilidade ou conexão com o outro lado e seus efeitos." },
         Magia: { descricao: "Seu conhecimento e domínio sobre a magia e seus usos." },
-        Sobrevivência: { descricao: "Seu conhecimento sobre a natureza e formas de sobreviver/improvisar nela." }
+        Sorte: { descricao: "Sua sorte"}
 },
     Raça: {},
     Habilidades: {
@@ -123,11 +124,11 @@ const tooltipDictionary = {
     LeituraDeSímbolosAntigos: {
         descricao: 'Você é capaz de decifrar símbolos e rituais antigos que seriam incompreensíveis para a maioria das pessoas.'
     },
-    Entrevistas: {
-        descricao: 'Gastando 5 de Medo e realizando um teste de Lábia, você pode fazer uma pergunta certeira que revela uma informação valiosa ou secreta.'
+    Inspiração: {
+        descricao: 'Você pode gastar 1 PE para propor uma estratégia criativa para a cena. Se o Mestre considerar a ideia interessante e viável para a situação, você recebe vantagem no próximo teste realizado para executar esse plano.'
     },
     RedeDeContatos: {
-        descricao: 'Você conhece pessoas influentes e bem posicionadas, podendo recorrer a elas para obter informações, favores ou recursos.'
+        descricao: 'Uma vez por Aventura, pode entrar em contato com alguém para obter uma informação, acesso ou ajuda.'
     },
     PreparoDeAbrigo: {
         descricao: 'Você domina técnicas de sobrevivência, sendo capaz de encontrar ou construir abrigos seguros em ambientes hostis ou urbanos.'

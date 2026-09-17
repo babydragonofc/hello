@@ -8,6 +8,44 @@ let fichaComPericiasAntigas = false;
 const changeLog = [
     {
         title: "Pequenas correções",
+        version: "1.1.4.2",
+        release: "16/09/2026",
+        content: "Pequenas correções e melhorias.",
+        changes: {
+            add: [
+                "Nova haba de Vantagens",
+                "Pericias com um novo visual"
+            ],
+            remove: [
+                "Diario removido novamente"
+            ],
+            fixes: [
+                "Agora as perícias mostram os dados do nivel",
+                "Outras pequenas correções do codigo."
+            ]
+        },
+        notes: "atualização de descrições e imagens em desenvolvimento"
+    },
+    {
+        title: "Pequenas correções",
+        version: "1.1.4.1",
+        release: "14/09/2026",
+        content: "Grande atualização do sistema. Raças e muito mais.",
+        changes: {
+            add: [
+                "Adição da perícia Sorte"
+            ],
+            remove: [
+
+            ],
+            fixes: [
+                "Correção da troca de Labia para Conversação",                
+            ]
+        },
+        notes: "atualização de descrições e imagens em desenvolvimento"
+    },
+    {
+        title: "Pequenas correções",
         version: "1.1.4.0",
         release: "09/09/2026",
         content: "Grande atualização do sistema. Raças e muito mais.",

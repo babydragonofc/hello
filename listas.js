@@ -148,7 +148,9 @@ function renderHabilidades() {
 
         const abilityDescriptionEl = document.createElement('p');
         abilityDescriptionEl.className = "abilityDesc scroll-container";
-        abilityDescriptionEl.innerHTML = ability.description.replaceAll("\n", "<br>");
+
+        abilityDescriptionEl.textContent = ability.description;
+        abilityDescriptionEl.style.whiteSpace = "pre-line";
         backSide.appendChild(abilityDescriptionEl);
 
         // Add favorite star icon
@@ -384,7 +386,7 @@ function showAbilityInfo(ability) {
     saveBtn.onclick = () => {
         ability.name = editAbilityNameInput.value;
         ability.description = editAbilityDescriptionInput.value;
-        renderHabilidades();
+renderHabilidades();
         panelClose();
     };
     abilityInfo.appendChild(saveBtn);
@@ -406,7 +408,7 @@ function showAbilityInfo(ability) {
     favoriteBtn.textContent = ability.isFavorite ? 'Desfavoritar' : 'Favoritar';
     favoriteBtn.onclick = () => {
         ability.isFavorite = !ability.isFavorite;
-        renderHabilidades(); // Re-render to update sorting and star
+renderHabilidades(); // Re-render to update sorting and star
         panelClose(); // Close info panel after action
     };
     abilityInfo.appendChild(favoriteBtn);
@@ -418,7 +420,7 @@ function showAbilityInfo(ability) {
     duplicateBtn.onclick = () => {
         const duplicatedAbility = { ...ability, name: ability.name + " (Cópia)", isFavorite: false }; // Create a copy, change name, not favorited by default
         ficha.habilidades.push(duplicatedAbility);
-        renderHabilidades(); // Re-render to show the new item
+renderHabilidades(); // Re-render to show the new item
         panelClose(); // Close info panel after action
     };
     abilityInfo.appendChild(duplicateBtn);
@@ -431,7 +433,7 @@ function showAbilityInfo(ability) {
         if (abilityIndex > -1) {
             ficha.habilidades.splice(abilityIndex, 1);
         }
-        renderHabilidades(); // Re-render after deletion
+renderHabilidades(); // Re-render after deletion
         panelClose();
     };
     abilityInfo.appendChild(deleteBtn);

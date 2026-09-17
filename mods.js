@@ -122,7 +122,7 @@ function applyMod(mod) {
 
     });
 
-    renderHabilidades();
+renderHabilidades();
     renderCustomStatuses();
 
 }
@@ -298,7 +298,6 @@ function openModDetails(mod) {
     if (mod.backgrounds && mod.backgrounds.length > 0) { 
         html += `<h2 class="title">Backgrounds</h2>`;
         Object.keys(mod.backgrounds).forEach(background => {
-            console.log(background, )
             html += `<button class='btn' onclick='setCustomWallpaper(${JSON.stringify(mod.backgrounds[background])})'>${mod.backgrounds[background].name}</button>`
         }); 
     }
@@ -322,7 +321,6 @@ function openModDetails(mod) {
         <div id='customItemList'>
             ${content}
         </div>`
-        console.log(mod)
     }
 
     panelOpen(null,mod.name,html);
@@ -338,7 +336,6 @@ function openModDetails(mod) {
                 input.addEventListener("change", function () {
 
                     ficha.status[status.id + "Max"]  = input.value;
-                    console.log(input.value)
 
                     verifyAutoSave();
                     statusAtu();
@@ -396,7 +393,7 @@ function removeMod(modId) {
 
     renderMods();
 
-    renderHabilidades();
+renderHabilidades();
 
     renderCustomStatuses();
 
@@ -427,7 +424,6 @@ function renderCustomStatuses() {
             const name = status.name;
 
             // Garante valores salvos
-            console.log(ficha.status[id])
             if (ficha.status[id] === undefined) {
                 ficha.status[id] = status.value;
             }
@@ -500,7 +496,7 @@ function reloadMods() {
     ficha.customStatus = []
 
     ficha.mods.forEach(mod => {
-        console.log("carregando mod " + mod.name + " ...")
+        ("carregando mod " + mod.name + " ...")
         applyMod(mod);
     });
 
